@@ -31,6 +31,7 @@
     "eslint-plugin-react": "^6.1.2",
     "jest-alias-preprocessor": "^1.0.2",
     "jest-cli": "^14.1.0",
+    "redux-thunk": "^2.1.0",
     "webpack": "^1.13.2"
   },
   "jest": {
