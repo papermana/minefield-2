@@ -1,8 +1,11 @@
+import clickField from './clickField';
+import {
+  CLICK_FIELD,
+} from './clickField';
+
 const types = {
   //  data: id of a field:
   FLAG_FIELD: 'FLAG_FIELD',
-  //  data: id of a field:
-  CLICK_FIELD: 'CLICK_FIELD',
 };
 
 const actionCreators = {};
@@ -15,6 +18,9 @@ for (const type in types) {
     data,
   });
 }
+
+actionCreators.clickField = clickField;
+types[CLICK_FIELD] = CLICK_FIELD;
 
 
 export default actionCreators;
