@@ -1,14 +1,16 @@
 const types = {
-  //  data: any string
-  TEST: 'TEST',
+  //  data: id of a field:
+  FLAG_FIELD: 'FLAG_FIELD',
+  //  data: id of a field:
+  CLICK_FIELD: 'CLICK_FIELD',
 };
 
 const actionCreators = {};
 
-for (let type in types) {
-  type = type.toLowerCase().replace(/_(\w)/, (match, s1) => s1.toUpperCase());
+for (const type in types) {
+  const name = type.toLowerCase().replace(/_(\w)/, (match, s1) => s1.toUpperCase());
 
-  actionCreators[type] = data => ({
+  actionCreators[name] = data => ({
     type,
     data,
   });

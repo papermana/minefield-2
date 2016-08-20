@@ -8,7 +8,10 @@ function BoardUi(props) {
   .map((field, i) => (
     <Field key={i}
       value={field}
-      action={props.playerActions.get(i)} />
+      id={i}
+      action={props.playerActions.get(i)}
+      clickField={props.clickField}
+      flagField={props.flagField} />
   ));
 
   return <div style={styles.board} >
@@ -19,6 +22,8 @@ function BoardUi(props) {
 BoardUi.propTypes = {
   layout: React.PropTypes.instanceOf(Immutable.List).isRequired,
   playerActions: React.PropTypes.instanceOf(Immutable.List).isRequired,
+  clickField: React.PropTypes.func.isRequired,
+  flagField: React.PropTypes.func.isRequired,
 };
 
 const styles = {

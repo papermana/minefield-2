@@ -11,6 +11,8 @@ class Field extends React.PureComponent {
 
     this.hoverStartFunc = this.hoverStartFunc.bind(this);
     this.hoverEndFunc = this.hoverEndFunc.bind(this);
+    this.clickField = this.clickField.bind(this);
+    this.flagField = this.flagField.bind(this);
   }
 
   hoverStartFunc() {
@@ -23,6 +25,15 @@ class Field extends React.PureComponent {
     this.setState({
       hovered: false,
     });
+  }
+
+  clickField() {
+    this.props.clickField(this.props.id);
+  }
+
+  flagField(e) {
+    e.preventDefault();
+    this.props.flagField(this.props.id);
   }
 
   render() {
@@ -40,13 +51,20 @@ class Field extends React.PureComponent {
           height="45" />;
       }
     }
+    else if (this.props.action === 'flagged') {
+      content = <img src="assets/flag.svg"
+        width="45"
+        height="45" />;
+    }
     else if (this.state.hovered) {
       style = styles.fieldHovered;
     }
 
     return <button style={style}
       onMouseOver={this.hoverStartFunc}
-      onMouseOut={this.hoverEndFunc} >
+      onMouseOut={this.hoverEndFunc}
+      onClick={this.clickField}
+      onContextMenu={this.flagField} >
       {content}
     </button>;
   }
@@ -57,11 +75,14 @@ Field.propTypes = {
     React.PropTypes.oneOf(['mine']),
     React.PropTypes.number,
   ]).isRequired,
+  id: React.PropTypes.number.isRequired,
   action: React.PropTypes.oneOf([
     undefined,
     'flagged',
     'clicked',
   ]),
+  clickField: React.PropTypes.func.isRequired,
+  flagField: React.PropTypes.func.isRequired,
 };
 
 const styles = {
