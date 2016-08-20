@@ -1,22 +1,8 @@
 import Immutable from 'immutable';
+import findNeighbors from '@utils/findNeighbors';
 
 
 const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
-
-const findNeighbors = (id, config) => {
-  const numOfFields = config.rows * config.columns;
-  const remainder = id % config.columns;
-  const neighbors = [id - config.columns, id + config.columns];
-
-  if (remainder !== 0) {
-    neighbors.push(id - 1, id - config.columns - 1, id + config.columns - 1);
-  }
-  if (remainder !== config.columns - 1) {
-    neighbors.push(id + 1, id - config.columns + 1, id + config.columns + 1);
-  }
-
-  return neighbors.filter(el => el >= 0 && el < numOfFields);
-};
 
 const populate = (board, config) => {
   const numOfFields = config.rows * config.columns;
@@ -64,6 +50,5 @@ const createBoardLayout = config => {
 export default createBoardLayout;
 //  Only for testing purposes:
 export {
-  findNeighbors,
   populate,
 };
