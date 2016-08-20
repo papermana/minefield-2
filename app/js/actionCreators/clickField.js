@@ -41,7 +41,7 @@ const clickField = id => {
     const fields = uncoverField(id, new Set());
 
     dispatch({
-      type: 'CLICK_FIELD',
+      type: CLICK_FIELD,
       data: fields,
     });
   };
