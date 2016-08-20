@@ -15,11 +15,11 @@ const reducers = (state = new State(), action) => {
   if (action.type === CLICK_FIELD) {
     return state
     .update('playerActions', list => {
-      action.data.forEach(entry => {
-        list = list.set(entry, 'clicked');
+      return list.withMutations(list => {
+        action.data.forEach(entry => {
+          list.set(entry, 'clicked');
+        });
       });
-
-      return list;
     });
   }
   else if (action.type === FLAG_FIELD) {
