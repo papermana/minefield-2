@@ -28,12 +28,20 @@ class Field extends React.PureComponent {
   }
 
   clickField() {
-    this.props.clickField(this.props.id);
+    if (this.props.action === undefined) {
+      this.props.clickField(this.props.id);
+    }
   }
 
   flagField(e) {
     e.preventDefault();
-    this.props.flagField(this.props.id);
+
+    if (this.props.action === undefined) {
+      this.props.flagField(this.props.id);
+    }
+    else if (this.props.action === 'flagged') {
+      //  Unflag action
+    }
   }
 
   render() {
