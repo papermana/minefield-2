@@ -1,9 +1,10 @@
 import React from 'react';
+import Board from '@components/Board';
 
 
 function App(props) {
   return <div>
-    Hello world!
+    <Board />
   </div>;
 }
 
