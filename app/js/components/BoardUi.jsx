@@ -5,7 +5,11 @@ import Field from '@components/Field';
 
 function BoardUi(props) {
   const fields = props.layout
-  .map((field, i) => <Field key={i} value={field} />);
+  .map((field, i) => (
+    <Field key={i}
+      value={field}
+      action={props.playerActions.get(i)} />
+  ));
 
   return <div style={styles.board} >
     {fields}
@@ -19,8 +23,18 @@ BoardUi.propTypes = {
 
 const styles = {
   board: {
-    width: 600,
-    height: 600,
+    display: 'flex',
+    flexWrap: 'wrap',
+    width: 500,
+    height: 500,
+    maxWidth: '90vh',
+    maxHeight: '90vh',
+    backgroundColor: 'transparent',
+    borderRadius: 4,
+    fontSize: 32,
+    textAlign: 'center',
+    lineHeight: 48,
+    overflow: 'auto',
   },
 };
 
