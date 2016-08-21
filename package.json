@@ -20,7 +20,7 @@
     "redux": "^3.5.2"
   },
   "devDependencies": {
-    "@papermana/eslint-config-basic": "^1.0.0",
+    "@papermana/eslint-config-personal": "github:papermana/eslint-config-basic#next",
     "babel-jest": "^14.1.0",
     "babel-loader": "^6.2.5",
     "babel-preset-es2015": "^6.13.2",

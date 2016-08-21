@@ -1,38 +1,21 @@
 {
-  "extends": "@papermana/eslint-config-basic",
+  "extends": [
+    "@papermana/eslint-config-personal",
+    "@papermana/eslint-config-personal/react"
+  ],
   "env": {
     "browser": true,
     "commonjs": true,
     "jest": true,
     "jasmine": true
   },
-  "globals": {
-    "chrome": false,
-    "_": false
-  },
   "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
     "sourceType": "module"
   },
   "plugins": [
-    "react",
     "jasmine"
   ],
   "rules": {
-    "react/forbid-prop-types": 1,
-    "react/jsx-closing-bracket-location": [1, "after-props"],
-    "react/jsx-no-duplicate-props": 2,
-    "react/jsx-uses-react": 2,
-    "react/jsx-uses-vars": 2,
-    "react/no-did-mount-set-state": 2,
-    "react/no-did-update-set-state": 2,
-    "react/no-direct-mutation-state": 2,
-    "react/no-set-state": 0,
-    "react/no-unknown-property": 2,
-    "react/prop-types": 2,
-    "react/self-closing-comp": 1,
-    "react/sort-comp": 2
+    "func-style": [1, "expression", {"allowArrowFunctions": true}]
   }
 }
