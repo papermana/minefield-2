@@ -20,22 +20,24 @@ describe('`dataTypes` - A collection of `Immutable.Record` classes for use as ap
     };
 
     it('should return a proper instance', () => {
-      expect((new BoardConfig()) instanceof BoardConfig).toBe(true);
+      const result = new BoardConfig();
+
+      expect(result instanceof BoardConfig).toBe(true);
+      expect(result instanceof Immutable.Record).toBe(true);
     });
 
     it('should have default values', () => {
-      expect((new BoardConfig()).toJS()).toEqual(defaultValues);
+      expect((new BoardConfig()).toObject()).toEqual(defaultValues);
     });
 
     it('should use the values it receives as an argument', () => {
-      const result = new BoardConfig({
+      const data = {
         rows: 5,
         columns: 5,
-      });
+        mines: 3,
+      };
 
-      expect(result.rows).toBe(5);
-      expect(result.columns).toBe(5);
-      expect(result.mines).toBe(defaultValues.mines);
+      expect((new BoardConfig(data)).toObject()).toEqual(data);
     });
   });
 
@@ -48,22 +50,25 @@ describe('`dataTypes` - A collection of `Immutable.Record` classes for use as ap
     };
 
     it('should return a proper instance', () => {
-      expect((new Status()) instanceof Status).toBe(true);
+      const result = new Status();
+
+      expect(result instanceof Status).toBe(true);
+      expect(result instanceof Immutable.Record).toBe(true);
     });
 
     it('should have default values', () => {
-      expect((new Status()).toJS()).toEqual(defaultValues);
+      expect((new Status()).toObject()).toEqual(defaultValues);
     });
 
     it('should use the values it receives as an argument', () => {
-      const result = new Status({
+      const data = {
         time: 50,
+        flagsDeployed: 1,
         minesFlagged: 2,
-      });
+        state: 'STATE_PAUSED',
+      };
 
-      expect(result.time).toBe(50);
-      expect(result.flagsDeployed).toBe(defaultValues.flagsDeployed);
-      expect(result.minesFlagged).toBe(2);
+      expect((new Status(data)).toObject()).toEqual(data);
     });
 
     it('should have getters returning constants allowed on the property `state`', () => {
@@ -82,7 +87,10 @@ describe('`dataTypes` - A collection of `Immutable.Record` classes for use as ap
     };
 
     it('should return a proper instance', () => {
-      expect((new UiState()) instanceof UiState).toBe(true);
+      const result = new UiState();
+
+      expect(result instanceof UiState).toBe(true);
+      expect(result instanceof Immutable.Record).toBe(true);
     });
 
     it('should have default values', () => {
@@ -90,11 +98,11 @@ describe('`dataTypes` - A collection of `Immutable.Record` classes for use as ap
     });
 
     it('should use the values it receives as an argument', () => {
-      const result = new UiState({
+      const data = {
         topbarActive: true,
-      });
+      };
 
-      expect(result.topbarActive).toBe(true);
+      expect((new UiState(data)).toObject()).toEqual(data);
     });
   });
 
@@ -108,7 +116,10 @@ describe('`dataTypes` - A collection of `Immutable.Record` classes for use as ap
     };
 
     it('should return a proper instance', () => {
-      expect((new State()) instanceof State).toBe(true);
+      const result = new State();
+
+      expect(result instanceof State).toBe(true);
+      expect(result instanceof Immutable.Record).toBe(true);
     });
 
     it('should have default values', () => {
