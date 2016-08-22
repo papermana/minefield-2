@@ -40,7 +40,7 @@ class Field extends React.PureComponent {
       this.props.flagField(this.props.id);
     }
     else if (this.props.action === 'flagged') {
-      //  Unflag action
+      this.props.unflagField(this.props.id);
     }
   }
 
@@ -91,6 +91,7 @@ Field.propTypes = {
   ]),
   clickField: React.PropTypes.func.isRequired,
   flagField: React.PropTypes.func.isRequired,
+  unflagField: React.PropTypes.func.isRequired,
 };
 
 const styles = {

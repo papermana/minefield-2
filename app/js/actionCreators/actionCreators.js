@@ -6,6 +6,8 @@ import {
 const types = {
   //  data: id of a field:
   FLAG_FIELD: 'FLAG_FIELD',
+  //  data: id of a field:
+  UNFLAG_FIELD: 'UNFLAG_FIELD',
 };
 
 const actionCreators = {};

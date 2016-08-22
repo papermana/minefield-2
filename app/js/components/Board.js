@@ -5,6 +5,7 @@ import actionCreators from '@js/actionCreators';
 
 const {
   flagField,
+  unflagField,
   clickField,
 } = actionCreators;
 
@@ -16,6 +17,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   flagField(id) {
     dispatch(flagField(id));
+  },
+  unflagField(id) {
+    dispatch(unflagField(id));
   },
   clickField(id) {
     dispatch(clickField(id));

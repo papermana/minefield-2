@@ -9,6 +9,7 @@ import {
 const {
   CLICK_FIELD,
   FLAG_FIELD,
+  UNFLAG_FIELD,
 } = types;
 
 const reducers = (state = new State(), action) => {
@@ -25,6 +26,10 @@ const reducers = (state = new State(), action) => {
   else if (action.type === FLAG_FIELD) {
     return state
     .setIn(['playerActions', action.data], 'flagged');
+  }
+  else if (action.type === UNFLAG_FIELD) {
+    return state
+    .setIn(['playerActions', action.data], undefined);
   }
   else {
     return state;

@@ -11,7 +11,8 @@ function BoardUi(props) {
       id={i}
       action={props.playerActions.get(i)}
       clickField={props.clickField}
-      flagField={props.flagField} />
+      flagField={props.flagField}
+      unflagField={props.unflagField} />
   ));
 
   return <div style={styles.board} >
@@ -24,6 +25,7 @@ BoardUi.propTypes = {
   playerActions: React.PropTypes.instanceOf(Immutable.List).isRequired,
   clickField: React.PropTypes.func.isRequired,
   flagField: React.PropTypes.func.isRequired,
+  unflagField: React.PropTypes.func.isRequired,
 };
 
 const styles = {
