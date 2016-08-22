@@ -19,6 +19,16 @@ actionCreators.clickField = clickField;
 actionCreators.rightClickField = rightClickField;
 actionCreators.startTimer = startTimer;
 
+actionCreators.showTopbar = () => ({
+  type: types.SHOW_TOPBAR,
+  data: undefined,
+});
+
+actionCreators.hideTopbar = () => ({
+  type: types.HIDE_TOPBAR,
+  data: undefined,
+});
+
 
 export default actionCreators;
 export {

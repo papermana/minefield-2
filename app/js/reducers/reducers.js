@@ -13,6 +13,8 @@ const {
   INCREMENT_TIMER,
   LOSE_GAME,
   WIN_GAME,
+  SHOW_TOPBAR,
+  HIDE_TOPBAR,
 } = types;
 
 const reducers = (state = new State(), action) => {
@@ -67,6 +69,14 @@ const reducers = (state = new State(), action) => {
       return status
       .set('state', status.STATE_WON);
     });
+  }
+  else if (action.type === SHOW_TOPBAR) {
+    return state
+    .setIn(['uiState', 'topbarActive'], true);
+  }
+  else if (action.type === HIDE_TOPBAR) {
+    return state
+    .setIn(['uiState', 'topbarActive'], false);
   }
   else {
     return state;

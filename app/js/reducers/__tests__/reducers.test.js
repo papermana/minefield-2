@@ -16,6 +16,8 @@ const {
   CLICK_FIELD,
   FLAG_FIELD,
   UNFLAG_FIELD,
+  SHOW_TOPBAR,
+  HIDE_TOPBAR,
 } = types;
 
 describe('`reducers.js` - The main reducer in the app', () => {
@@ -111,5 +113,23 @@ describe('`reducers.js` - The main reducer in the app', () => {
       data: 1,
     });
     expect(state.status.minesFlagged).toBe(0);
+  });
+
+  it('should change `uiState.topbarActive` in response to actions `SHOW_TOPBAR` and `HIDE_TOPBAR`', () => {
+    let state = new State();
+
+    expect(state.uiState.topbarActive).toBe(false);
+
+    state = reducers(state, {
+      type: SHOW_TOPBAR,
+      data: undefined,
+    });
+    expect(state.uiState.topbarActive).toBe(true);
+
+    state = reducers(state, {
+      type: HIDE_TOPBAR,
+      data: undefined,
+    });
+    expect(state.uiState.topbarActive).toBe(false);
   });
 });

@@ -12,7 +12,8 @@ class HeaderUi extends React.PureComponent {
   render() {
     return <div style={styles.wrapper} >
       <div style={styles.staticBar} >
-        <IconButton action="menu" />
+        <IconButton action="menu"
+          onClick={this.props.showTopbar} />
         <div style={styles.message} >
           {
             this.props.status.state === this.props.status.STATE_PAUSED &&
@@ -42,7 +43,10 @@ class HeaderUi extends React.PureComponent {
 
 HeaderUi.propTypes = {
   status: React.PropTypes.instanceOf(Immutable.Record).isRequired,
+  uiState: React.PropTypes.instanceOf(Immutable.Record).isRequired,
   startTimer: React.PropTypes.func.isRequired,
+  showTopbar: React.PropTypes.func.isRequired,
+  hideTopbar: React.PropTypes.func.isRequired,
 };
 
 const styles = {

@@ -5,11 +5,18 @@ import actionCreators from '@js/actionCreators';
 
 const mapStateToProps = state => ({
   status: state.status,
+  uiState: state.uiState,
 });
 
 const mapDispatchToProps = dispatch => ({
   startTimer() {
     dispatch(actionCreators.startTimer());
+  },
+  showTopbar() {
+    dispatch(actionCreators.showTopbar());
+  },
+  hideTopbar() {
+    dispatch(actionCreators.hideTopbar());
   },
 });
 
