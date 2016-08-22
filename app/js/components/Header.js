@@ -18,6 +18,9 @@ const mapDispatchToProps = dispatch => ({
   hideTopbar() {
     dispatch(actionCreators.hideTopbar());
   },
+  startNewGame() {
+    dispatch(actionCreators.startNewGame());
+  },
 });
 
 

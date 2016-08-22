@@ -19,7 +19,8 @@ class HeaderUi extends React.PureComponent {
       <div style={topbarStyle} >
         <IconButton action="back"
           onClick={this.props.hideTopbar} />
-        <TextButton>
+        <TextButton
+          onClick={this.props.startNewGame} >
           New Game
         </TextButton>
       </div>
@@ -59,6 +60,7 @@ HeaderUi.propTypes = {
   startTimer: React.PropTypes.func.isRequired,
   showTopbar: React.PropTypes.func.isRequired,
   hideTopbar: React.PropTypes.func.isRequired,
+  startNewGame: React.PropTypes.func.isRequired,
 };
 
 const styles = {

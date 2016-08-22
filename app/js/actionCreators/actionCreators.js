@@ -14,6 +14,11 @@ const hideTopbar = () => ({
   data: undefined,
 });
 
+const startNewGame = () => ({
+  type: types.START_NEW_GAME,
+  data: undefined,
+});
+
 
 export default {
   clickField,
@@ -21,6 +26,7 @@ export default {
   startTimer,
   showTopbar,
   hideTopbar,
+  startNewGame,
 };
 export {
   types,

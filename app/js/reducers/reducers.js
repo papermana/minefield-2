@@ -1,9 +1,12 @@
+import Immutable from 'immutable';
 import {
+  Status,
   State,
 } from './dataTypes';
 import {
   types,
 } from '@js/actionCreators';
+import createBoardLayout from '@utils/createBoardLayout';
 
 
 const {
@@ -15,6 +18,7 @@ const {
   WIN_GAME,
   SHOW_TOPBAR,
   HIDE_TOPBAR,
+  START_NEW_GAME,
 } = types;
 
 const reducers = (state = new State(), action) => {
@@ -76,6 +80,13 @@ const reducers = (state = new State(), action) => {
   }
   else if (action.type === HIDE_TOPBAR) {
     return state
+    .setIn(['uiState', 'topbarActive'], false);
+  }
+  else if (action.type === START_NEW_GAME) {
+    return state
+    .set('boardLayout', createBoardLayout(state.get('boardConfig')))
+    .set('playerActions', new Immutable.List())
+    .set('status', new Status())
     .setIn(['uiState', 'topbarActive'], false);
   }
   else {

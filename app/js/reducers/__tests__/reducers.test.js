@@ -2,14 +2,19 @@ jest.unmock('@js/reducers');
 jest.unmock('@js/reducers/dataTypes');
 jest.unmock('@js/actionCreators');
 
+import Immutable from 'immutable';
 import reducers from '@js/reducers';
 import {
   Status,
+  BoardConfig,
+  UiState,
   State,
 } from '@js/reducers/dataTypes';
 import {
   types,
 } from '@js/actionCreators';
+import createBoardLayout from '@utils/createBoardLayout';
+
 
 
 const {
@@ -21,6 +26,7 @@ const {
   WIN_GAME,
   SHOW_TOPBAR,
   HIDE_TOPBAR,
+  START_NEW_GAME,
 } = types;
 
 describe('`reducers.js` - The main reducer in the app', () => {
@@ -164,5 +170,39 @@ describe('`reducers.js` - The main reducer in the app', () => {
       data: undefined,
     });
     expect(state.uiState.topbarActive).toBe(false);
+  });
+
+  it('should create fresh properties `boardLayout`, `playerActions` and `status` if the action `START_NEW_GAME` is dispatched', () => {
+    const state = new State({
+      boardLayout: new Immutable.List([0, 1, 2, 3, 'mine']),
+      playerActions: new Immutable.List([undefined, 'clicked', 'flagged']),
+      status: new Status({
+        time: 34,
+        flagsDeployed: 1,
+      }),
+      boardConfig: new BoardConfig({
+        rows: 10,
+        columns: 10,
+      }),
+      UiState: new UiState(),
+    });
+    const result = reducers(state, {
+      type: START_NEW_GAME,
+      data: undefined,
+    });
+
+    //  A utility function gets called and current config is passed:
+    expect(result.boardLayout).not.toBe(state.boardLayout);
+    expect(createBoardLayout).toBeCalled();
+    expect(createBoardLayout).toBeCalledWith(state.boardConfig);
+    //  Those two are simply reset:
+    expect(result.playerActions).not.toBe(state.playerActions);
+    expect(result.playerActions).toEqual(new Immutable.List());
+    expect(result.status).not.toBe(state.status);
+    expect(result.status).toEqual(new Status());
+    //  Hide the topbar:
+    expect(result.uiState.topbarActive).toBe(false);
+    //  The rest remains the same:
+    expect(result.boardConfig).toBe(state.boardConfig);
   });
 });
