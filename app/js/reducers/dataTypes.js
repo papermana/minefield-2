@@ -2,31 +2,23 @@ import Immutable from 'immutable';
 import createBoardLayout from '@utils/createBoardLayout';
 
 
-class BoardConfig extends Immutable.Record({
+class BoardConfig extends new Immutable.Record({
   rows: 10,
   columns: 10,
   mines: 12,
-}) {
-  constructor(data) {
-    super(data);
-  }
-}
+}) {}
 
-class Status extends Immutable.Record({
+class Status extends new Immutable.Record({
   time: 0,
   flagsDeployed: 0,
   minesFlagged: 0,
-}) {
-  constructor(data) {
-    super(data);
-  }
-}
+}) {}
 
-class State extends Immutable.Record({
+class State extends new Immutable.Record({
   boardConfig: new BoardConfig(),
   status: new Status(),
   boardLayout: createBoardLayout(new BoardConfig()),
-  playerActions: Immutable.List(),
+  playerActions: new Immutable.List(),
 }) {
   constructor(data) {
     const dataToPass = Object.assign({}, data);
@@ -41,14 +33,14 @@ class State extends Immutable.Record({
       }
 
       if (data.boardLayout) {
-        dataToPass.boardLayout = Immutable.List(data.boardLayout);
+        dataToPass.boardLayout = new Immutable.List(data.boardLayout);
       }
       else {
         dataToPass.boardLayout = createBoardLayout(data.boardConfig || new BoardConfig());
       }
 
       if (data.playerActions) {
-        dataToPass.playerActions = Immutable.List(data.playerActions);
+        dataToPass.playerActions = new Immutable.List(data.playerActions);
       }
     }
 
