@@ -2,7 +2,6 @@ jest.unmock('@js/reducers');
 jest.unmock('@js/reducers/dataTypes');
 jest.unmock('@js/actionCreators');
 
-import Immutable from 'immutable';
 import reducers from '@js/reducers';
 import {
   Status,
@@ -32,22 +31,20 @@ describe('`reducers.js` - The main reducer in the app', () => {
   });
 
   it('should return state unchanged if it doesn\'t recognize the action', () => {
-    const state = new Immutable.Map();
-    const action = {
+    const state = new State();
+    const result = reducers(state, {
       type: 'TEST',
       data: undefined,
-    };
-    const result = reducers(state, action);
+    });
 
     expect(result).toBe(state);
   });
 
   it('should, in case of a `CLICK_FIELD` action, take the array passed in as action data, and for each value in that array set "clicked" in the `playerActions` property at an index equal to the value', () => {
-    const action = {
+    const result = reducers(undefined, {
       type: CLICK_FIELD,
       data: [0, 5, 8],
-    };
-    const result = reducers(undefined, action);
+    });
 
     expect(result.playerActions.toJS()).toEqual([
       'clicked',
@@ -59,40 +56,38 @@ describe('`reducers.js` - The main reducer in the app', () => {
   });
 
   it('should, in case of a `FLAG_FIELD` action, set "flagged" in the `playerActions` property at an index equal to the value in action data and increase the `flagsDeployed` counter in `status`', () => {
-    const state = new State({
+    let state = new State({
       boardLayout: [],
     });
-    const action = {
+
+    state = reducers(state, {
       type: FLAG_FIELD,
       data: 2,
-    };
-    const result = reducers(state, action);
-
-    expect(result.playerActions.toJS()).toEqual([
+    });
+    expect(state.playerActions.toJS()).toEqual([
       undefined, undefined,
       'flagged',
     ]);
-    expect(result.status.flagsDeployed).toBe(1);
+    expect(state.status.flagsDeployed).toBe(1);
   });
 
-  it ('should, in case of an `UNFLAG_FIELD` action, set `undefined` in the `playerActions` property at an index equal to the value in action data and decrease the `flagsDeployed` counter in `status`', () => {
-    const state = new State({
+  it('should, in case of an `UNFLAG_FIELD` action, set `undefined` in the `playerActions` property at an index equal to the value in action data and decrease the `flagsDeployed` counter in `status`', () => {
+    let state = new State({
       boardLayout: [],
       playerActions: [undefined, undefined, 'flagged'],
       status: {
         flagsDeployed: 1,
       },
     });
-    const action = {
+
+    state = reducers(state, {
       type: UNFLAG_FIELD,
       data: 2,
-    };
-    const result = reducers(state, action);
-
-    expect(result.playerActions.toJS()).toEqual([
+    });
+    expect(state.playerActions.toJS()).toEqual([
       undefined, undefined, undefined,
     ]);
-    expect(result.status.flagsDeployed).toBe(0);
+    expect(state.status.flagsDeployed).toBe(0);
   });
 
   it('should, in case of a `FLAG_FIELD` or `UNFLAG_FIELD` action, if neccessary, increase or decrease the `minesFlagged` counter in the `status` property', () => {
