@@ -25,9 +25,9 @@ const reducers = (state = new State(), action) => {
   if (action.type === CLICK_FIELD) {
     return state
     .update('playerActions', list => {
-      return list.withMutations(list => {
+      return list.withMutations(listMut => {
         action.data.forEach(entry => {
-          list.set(entry, 'clicked');
+          listMut.set(entry, 'clicked');
         });
       });
     });

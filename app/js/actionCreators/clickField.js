@@ -12,23 +12,23 @@ const clickField = id => {
     const layout = state.boardLayout;
     const config = state.boardConfig;
 
-    const uncoverField = (id, alreadyUncovered) => {
-      const value = layout.get(id);
+    const uncoverField = (currentId, alreadyUncovered) => {
+      const value = layout.get(currentId);
 
       if (value === 'mine') {
-        alreadyUncovered.add(id);
+        alreadyUncovered.add(currentId);
         dispatch({
           type: LOSE_GAME,
           data: undefined,
         });
       }
       else if (value !== 0) {
-        alreadyUncovered.add(id);
+        alreadyUncovered.add(currentId);
       }
       else if (value === 0) {
-        const neighbors = findNeighbors(id, config);
+        const neighbors = findNeighbors(currentId, config);
 
-        alreadyUncovered.add(id);
+        alreadyUncovered.add(currentId);
 
         neighbors.forEach(entry => {
           if (!alreadyUncovered.has(entry) && actions.get(entry) === undefined) {

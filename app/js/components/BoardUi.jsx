@@ -3,7 +3,7 @@ import Immutable from 'immutable';
 import Field from '@components/Field';
 
 
-function BoardUi(props) {
+const BoardUi = props => {
   const fields = props.layout
   .map((field, i) => (
     <Field key={i}
@@ -17,12 +17,12 @@ function BoardUi(props) {
   return <div style={styles.board} >
     {fields}
   </div>;
-}
+};
 
 BoardUi.propTypes = {
+  clickField: React.PropTypes.func.isRequired,
   layout: React.PropTypes.instanceOf(Immutable.List).isRequired,
   playerActions: React.PropTypes.instanceOf(Immutable.List).isRequired,
-  clickField: React.PropTypes.func.isRequired,
   rightClickField: React.PropTypes.func.isRequired,
 };
 

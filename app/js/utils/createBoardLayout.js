@@ -39,9 +39,9 @@ const populate = (board, config) => {
 
 const createBoardLayout = config => {
   const numOfFields = config.rows * config.columns;
-  let result = Immutable.List().setSize(numOfFields);
+  let result = new Immutable.List().setSize(numOfFields);
 
-  result = result.withMutations(result => populate(result, config));
+  result = result.withMutations(resultMut => populate(resultMut, config));
 
   return result;
 };

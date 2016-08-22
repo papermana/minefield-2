@@ -79,18 +79,18 @@ class Field extends React.PureComponent {
 }
 
 Field.propTypes = {
-  value: React.PropTypes.oneOfType([
-    React.PropTypes.oneOf(['mine']),
-    React.PropTypes.number,
-  ]).isRequired,
-  id: React.PropTypes.number.isRequired,
   action: React.PropTypes.oneOf([
     undefined,
     'flagged',
     'clicked',
   ]),
   clickField: React.PropTypes.func.isRequired,
+  id: React.PropTypes.number.isRequired,
   rightClickField: React.PropTypes.func.isRequired,
+  value: React.PropTypes.oneOfType([
+    React.PropTypes.oneOf(['mine']),
+    React.PropTypes.number,
+  ]).isRequired,
 };
 
 const styles = {

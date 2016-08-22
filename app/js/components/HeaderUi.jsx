@@ -55,12 +55,12 @@ class HeaderUi extends React.PureComponent {
 }
 
 HeaderUi.propTypes = {
+  hideTopbar: React.PropTypes.func.isRequired,
+  showTopbar: React.PropTypes.func.isRequired,
+  startNewGame: React.PropTypes.func.isRequired,
+  startTimer: React.PropTypes.func.isRequired,
   status: React.PropTypes.instanceOf(Immutable.Record).isRequired,
   uiState: React.PropTypes.instanceOf(Immutable.Record).isRequired,
-  startTimer: React.PropTypes.func.isRequired,
-  showTopbar: React.PropTypes.func.isRequired,
-  hideTopbar: React.PropTypes.func.isRequired,
-  startNewGame: React.PropTypes.func.isRequired,
 };
 
 const styles = {

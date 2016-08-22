@@ -3,14 +3,14 @@ import Header from '@components/Header';
 import Board from '@components/Board';
 
 
-function App(props) {
+const App = () => {
   return <div style={styles.app} >
     <Header />
     <div style={styles.boardWrapper} >
       <Board />
     </div>
   </div>;
-}
+};
 
 const styles = {
   app: {
