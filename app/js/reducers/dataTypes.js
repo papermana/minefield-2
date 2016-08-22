@@ -31,11 +31,16 @@ class Status extends new Immutable.Record({
   }
 }
 
+class UiState extends new Immutable.Record({
+  topbarActive: false,
+}) {}
+
 class State extends new Immutable.Record({
   boardConfig: new BoardConfig(),
   status: new Status(),
   boardLayout: createBoardLayout(new BoardConfig()),
   playerActions: new Immutable.List(),
+  uiState: new UiState(),
 }) {
   constructor(data) {
     const dataToPass = Object.assign({}, data);
@@ -59,6 +64,10 @@ class State extends new Immutable.Record({
       if (data.playerActions) {
         dataToPass.playerActions = new Immutable.List(data.playerActions);
       }
+
+      if (data.uiState) {
+        dataToPass.uiState = new UiState(data.uiState);
+      }
     }
 
     super(dataToPass);
@@ -69,5 +78,6 @@ class State extends new Immutable.Record({
 export {
   State,
   BoardConfig,
+  UiState,
   Status,
 };

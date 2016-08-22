@@ -4,6 +4,7 @@ import Immutable from 'immutable';
 import {
   BoardConfig,
   Status,
+  UiState,
   State,
 } from '@js/reducers/dataTypes';
 import createBoardLayout from '@utils/createBoardLayout';
@@ -75,12 +76,35 @@ describe('`dataTypes` - A collection of `Immutable.Record` classes for use as ap
     });
   });
 
+  describe('`UiState` - A class holding the state of UI', () => {
+    const defaultValues = {
+      topbarActive: false,
+    };
+
+    it('should return a proper instance', () => {
+      expect((new UiState()) instanceof UiState).toBe(true);
+    });
+
+    it('should have default values', () => {
+      expect((new UiState()).toJS()).toEqual(defaultValues);
+    });
+
+    it('should use the values it receives as an argument', () => {
+      const result = new UiState({
+        topbarActive: true,
+      });
+
+      expect(result.topbarActive).toBe(true);
+    });
+  });
+
   describe('`State` - A class holding the entire state of the app', () => {
     const defaultValues = {
       boardConfig: new BoardConfig(),
       status: new Status(),
       boardLayout: createBoardLayout(new BoardConfig()),
       playerActions: new Immutable.List(),
+      uiState: new UiState(),
     };
 
     it('should return a proper instance', () => {
@@ -105,11 +129,15 @@ describe('`dataTypes` - A collection of `Immutable.Record` classes for use as ap
       };
       const boardLayoutData = [1, 1, 0, 0, 'mine', 'mine', 3, 2, 0, 0];
       const playerActionsData = [undefined, undefined, 'flagged', 'clicked'];
+      const uiStateData = {
+        topbarActive: true,
+      };
       const data = {
         boardConfig: boardConfigData,
         status: statusData,
         boardLayout: boardLayoutData,
         playerActions: playerActionsData,
+        uiState: uiStateData,
       };
       const result = new State(data);
 
@@ -120,6 +148,8 @@ describe('`dataTypes` - A collection of `Immutable.Record` classes for use as ap
       expect(result.status).toEqual(new Status(statusData));
       expect(Immutable.List.isList(result.boardLayout)).toBe(true);
       expect(Immutable.List.isList(result.playerActions)).toBe(true);
+      expect(result.uiState instanceof UiState).toBe(true);
+      expect(result.uiState).toEqual(new UiState(uiStateData));
     });
   });
 
