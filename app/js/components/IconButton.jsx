@@ -11,7 +11,8 @@ const IconButton = props => {
     {...props} >
     <img src={src[props.action]}
       width="24"
-      height="24" />
+      height="24"
+      draggable={false} />
   </button>;
 };
 
