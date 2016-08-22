@@ -1,4 +1,5 @@
 jest.unmock('@js/actionCreators/clickField');
+jest.unmock('@js/actionCreators/types');
 jest.unmock('@utils/findNeighbors');
 jest.unmock('@js/reducers/dataTypes');
 jest.unmock('redux-mock-store');
@@ -7,6 +8,9 @@ jest.unmock('redux-thunk');
 import clickField, {
   CLICK_FIELD,
 } from '@js/actionCreators/clickField';
+import {
+  LOSE_GAME,
+} from '@js/actionCreators/types';
 import {
   State,
 } from '@js/reducers/dataTypes';
@@ -32,7 +36,7 @@ describe('`clickField()` - An async action creators which decides which fields t
     ]);
   });
 
-  it('should uncover only the clicked field if there is a mine under it', () => {
+  it('should send a `LOSE_GAME` action and uncover the clicked field if there is a mine under it', () => {
     const store = mockStore(new State({
       boardLayout: [0, 0, 'mine', 1],
     }));
@@ -40,6 +44,10 @@ describe('`clickField()` - An async action creators which decides which fields t
     store.dispatch(clickField(2));
 
     expect(store.getActions()).toEqual([
+      {
+        type: LOSE_GAME,
+        data: undefined,
+      },
       {
         type: CLICK_FIELD,
         data: new Set([2]),
