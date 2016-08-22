@@ -1,6 +1,8 @@
 import React from 'react';
 
 
+const getBackgroundColor = value => `rgba(222, 215, 223, ${value * 0.075})`;
+
 class Field extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -52,6 +54,11 @@ class Field extends React.PureComponent {
         content = <img src="assets/mine-exploded.svg"
           width="50"
           height="50" />;
+      }
+
+      if (content !== 0) {
+        style = Object.assign({}, styles.fieldClicked);
+        style.backgroundColor = getBackgroundColor(content === 'mine' ? 9 : 8);
       }
     }
     else if (this.props.action === 'flagged') {
@@ -107,7 +114,7 @@ const styles = {
 };
 
 styles.fieldHovered = Object.assign({}, styles.field, {
-  backgroundColor: 'rgba(222, 215, 223, 0.45)',
+  backgroundColor: 'rgba(192, 185, 193, 1)',
 });
 
 styles.fieldClicked = Object.assign({}, styles.field, {
