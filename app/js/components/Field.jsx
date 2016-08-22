@@ -50,14 +50,14 @@ class Field extends React.PureComponent {
 
       if (content === 'mine') {
         content = <img src="assets/mine-exploded.svg"
-          width="45"
-          height="45" />;
+          width="50"
+          height="50" />;
       }
     }
     else if (this.props.action === 'flagged') {
       content = <img src="assets/flag.svg"
-        width="45"
-        height="45" />;
+        width="50"
+        height="50" />;
     }
     else if (this.state.hovered) {
       style = styles.fieldHovered;
@@ -90,9 +90,10 @@ Field.propTypes = {
 
 const styles = {
   field: {
-    width: '10%',
-    height: '10%',
+    width: 50,
+    height: 50,
     backgroundColor: 'rgb(222, 215, 223)',
+    fontSize: 24,
     cursor: 'pointer',
     MsUserSelect: 'none',
     MoztUserSelect: 'none',
@@ -101,6 +102,7 @@ const styles = {
     //  Remove default button styles:
     border: 'none',
     outline: 'none',
+    padding: 0,
   },
 };
 

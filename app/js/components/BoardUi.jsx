@@ -39,7 +39,6 @@ const styles = {
     fontSize: 32,
     textAlign: 'center',
     lineHeight: 48,
-    overflow: 'auto',
   },
 };
 
