@@ -15,6 +15,7 @@ import {
 const {
   CLICK_FIELD,
   FLAG_FIELD,
+  UNFLAG_FIELD,
 } = types;
 
 describe('`reducers.js` - The main reducer in the app', () => {
@@ -51,16 +52,64 @@ describe('`reducers.js` - The main reducer in the app', () => {
     ]);
   });
 
-  it('should, in case of a `FLAG_FIELD` action, set "flagged" in the `playerActions` property at an index equal to the value in action data', () => {
+  it('should, in case of a `FLAG_FIELD` action, set "flagged" in the `playerActions` property at an index equal to the value in action data and increase the `flagsDeployed` counter in `status`', () => {
+    const state = new State({
+      boardLayout: [],
+    });
     const action = {
       type: FLAG_FIELD,
       data: 2,
     };
-    const result = reducers(undefined, action);
+    const result = reducers(state, action);
 
     expect(result.playerActions.toJS()).toEqual([
       undefined, undefined,
       'flagged',
     ]);
+    expect(result.status.flagsDeployed).toBe(1);
+  });
+
+  it ('should, in case of an `UNFLAG_FIELD` action, set `undefined` in the `playerActions` property at an index equal to the value in action data and decrease the `flagsDeployed` counter in `status`', () => {
+    const state = new State({
+      boardLayout: [],
+      playerActions: [undefined, undefined, 'flagged'],
+      status: {
+        flagsDeployed: 1,
+      },
+    });
+    const action = {
+      type: UNFLAG_FIELD,
+      data: 2,
+    };
+    const result = reducers(state, action);
+
+    expect(result.playerActions.toJS()).toEqual([
+      undefined, undefined, undefined,
+    ]);
+    expect(result.status.flagsDeployed).toBe(0);
+  });
+
+  it('should, in case of a `FLAG_FIELD` or `UNFLAG_FIELD` action, if neccessary, increase or decrease the `minesFlagged` counter in the `status` property', () => {
+    let state = new State({
+      boardLayout: ['mine', 0],
+    });
+
+    state = reducers(state, {
+      type: FLAG_FIELD,
+      data: 0,
+    });
+    expect(state.status.minesFlagged).toBe(1);
+
+    state = reducers(state, {
+      type: UNFLAG_FIELD,
+      data: 0,
+    });
+    expect(state.status.minesFlagged).toBe(0);
+
+    state = reducers(state, {
+      type: FLAG_FIELD,
+      data: 1,
+    });
+    expect(state.status.minesFlagged).toBe(0);
   });
 });
