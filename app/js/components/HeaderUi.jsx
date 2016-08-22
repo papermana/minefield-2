@@ -11,6 +11,20 @@ class HeaderUi extends React.PureComponent {
   render() {
     return <div style={styles.wrapper} >
       <div style={styles.staticBar} >
+        <div style={styles.message} >
+          {
+            this.props.status.state === this.props.status.STATE_PAUSED &&
+            'Paused'
+          }
+          {
+            this.props.status.state === this.props.status.STATE_LOST &&
+            'BOOM! You lose.'
+          }
+          {
+            this.props.status.state === this.props.status.STATE_WON &&
+            'Congratulations! You win'
+          }
+        </div>
         <div style={styles.gameInfo} >
           <div style={styles.timer} >
             {formatTime(this.props.status.time)}
@@ -43,6 +57,9 @@ const styles = {
     width: '100%',
     height: '100%',
     fontSize: 24,
+  },
+  message: {
+    textAlign: 'center',
   },
   gameInfo: {
     display: 'flex',
