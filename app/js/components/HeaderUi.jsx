@@ -92,6 +92,7 @@ const styles = {
     width: '100%',
     height: '100%',
     padding: 12,
+    fontFamily: 'Roboto Condensed, sans-serif',
     fontSize: 24,
     boxSizing: 'border-box',
   },

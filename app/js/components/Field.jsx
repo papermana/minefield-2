@@ -98,6 +98,7 @@ const styles = {
     width: 50,
     height: 50,
     backgroundColor: 'rgb(222, 215, 223)',
+    fontFamily: 'Roboto Condensed, sans-serif',
     fontSize: 24,
     cursor: 'pointer',
     MsUserSelect: 'none',

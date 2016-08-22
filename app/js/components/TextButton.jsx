@@ -45,6 +45,7 @@ const styles = {
   button: {
     padding: 12,
     backgroundColor: 'transparent',
+    fontFamily: 'Roboto Condensed, sans-serif',
     fontSize: 24,
     cursor: 'pointer',
     MsUserSelect: 'none',

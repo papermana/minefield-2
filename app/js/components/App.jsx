@@ -18,7 +18,6 @@ const styles = {
     flexDirection: 'column',
     width: '100vw',
     height: '100vh',
-    fontFamily: 'Roboto Condensed, sans-serif',
   },
   boardWrapper: {
     flexGrow: 1,
