@@ -5,6 +5,7 @@ jest.unmock('@js/actionCreators');
 import Immutable from 'immutable';
 import reducers from '@js/reducers';
 import {
+  Status,
   State,
 } from '@js/reducers/dataTypes';
 import {
@@ -16,6 +17,9 @@ const {
   CLICK_FIELD,
   FLAG_FIELD,
   UNFLAG_FIELD,
+  INCREMENT_TIMER,
+  LOSE_GAME,
+  WIN_GAME,
   SHOW_TOPBAR,
   HIDE_TOPBAR,
 } = types;
@@ -113,6 +117,40 @@ describe('`reducers.js` - The main reducer in the app', () => {
       data: 1,
     });
     expect(state.status.minesFlagged).toBe(0);
+  });
+
+  it('should increase the value of `status.time` when receiving the action `INCREMENT_TIMER`', () => {
+    let state = new State();
+
+    expect(state.status.time).toBe(0);
+
+    state = reducers(state, {
+      type: INCREMENT_TIMER,
+      data: undefined,
+    });
+    expect(state.status.time).toBe(1);
+  });
+
+  it('should, in case of a `LOSE_GAME` or `WIN_GAME` action, change the value of `status.state` to one of the constants available on the Status instance', () => {
+    const statusInstance = new Status();
+    const STATE_GOING = statusInstance.STATE_GOING;
+    const STATE_WON = statusInstance.STATE_WON;
+    const STATE_LOST = statusInstance.STATE_LOST;
+    let state = new State();
+
+    expect(state.status.state).toBe(STATE_GOING);
+
+    state = reducers(state, {
+      type: LOSE_GAME,
+      data: undefined,
+    });
+    expect(state.status.state).toBe(STATE_LOST);
+
+    state = reducers(state, {
+      type: WIN_GAME,
+      data: undefined,
+    });
+    expect(state.status.state).toBe(STATE_WON);
   });
 
   it('should change `uiState.topbarActive` in response to actions `SHOW_TOPBAR` and `HIDE_TOPBAR`', () => {
