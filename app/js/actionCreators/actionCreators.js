@@ -1,13 +1,7 @@
-import clickField, {
-  CLICK_FIELD,
-} from './clickField';
-import rightClickField, {
-  FLAG_FIELD,
-  UNFLAG_FIELD,
-} from './rightClickField';
+import * as types from './types';
+import clickField from './clickField';
+import rightClickField from './rightClickField';
 
-const types = {
-};
 
 const actionCreators = {};
 
@@ -21,11 +15,7 @@ for (const type in types) {
 }
 
 actionCreators.clickField = clickField;
-types[CLICK_FIELD] = CLICK_FIELD;
-
 actionCreators.rightClickField = rightClickField;
-types[FLAG_FIELD] = FLAG_FIELD;
-types[UNFLAG_FIELD] = UNFLAG_FIELD;
 
 
 export default actionCreators;

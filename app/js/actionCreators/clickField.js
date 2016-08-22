@@ -1,7 +1,8 @@
 import findNeighbors from '@utils/findNeighbors';
+import {
+  CLICK_FIELD,
+} from './types';
 
-
-const CLICK_FIELD = 'CLICK_FIELD';
 
 const clickField = id => {
   return (dispatch, getState) => {

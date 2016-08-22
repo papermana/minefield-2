@@ -1,5 +1,8 @@
-const FLAG_FIELD = 'FLAG_FIELD';
-const UNFLAG_FIELD = 'UNFLAG_FIELD';
+import {
+  FLAG_FIELD,
+  UNFLAG_FIELD,
+} from './types';
+
 
 const rightClickField = id => {
   return (dispatch, getState) => {
