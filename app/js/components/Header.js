@@ -7,7 +7,14 @@ const mapStateToProps = state => ({
   status: state.status,
 });
 
+const mapDispatchToProps = dispatch => ({
+  startTimer() {
+    dispatch(actionCreators.startTimer());
+  },
+});
+
 
 export default ReactRedux.connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(HeaderUi);

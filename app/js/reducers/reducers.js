@@ -10,6 +10,7 @@ const {
   CLICK_FIELD,
   FLAG_FIELD,
   UNFLAG_FIELD,
+  INCREMENT_TIMER
 } = types;
 
 const reducers = (state = new State(), action) => {
@@ -46,6 +47,10 @@ const reducers = (state = new State(), action) => {
     }
 
     return state;
+  }
+  else if (action.type === INCREMENT_TIMER) {
+    return state
+    .updateIn(['status', 'time'], time => ++time);
   }
   else {
     return state;

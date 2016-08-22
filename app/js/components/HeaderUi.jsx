@@ -3,23 +3,30 @@ import Immutable from 'immutable';
 import formatTime from '@utils/formatTime';
 
 
-const HeaderUi = props => {
-  return <div style={styles.wrapper} >
-    <div style={styles.staticBar} >
-      <div style={styles.gameInfo} >
-        <div style={styles.timer} >
-          {formatTime(props.status.time)}
-        </div>
-        <div style={styles.flagsCounter} >
-          {props.status.flagsDeployed}
+class HeaderUi extends React.PureComponent {
+  componentDidMount() {
+    this.props.startTimer();
+  }
+
+  render() {
+    return <div style={styles.wrapper} >
+      <div style={styles.staticBar} >
+        <div style={styles.gameInfo} >
+          <div style={styles.timer} >
+            {formatTime(this.props.status.time)}
+          </div>
+          <div style={styles.flagsCounter} >
+            {this.props.status.flagsDeployed}
+          </div>
         </div>
       </div>
-    </div>
-  </div>;
-};
+    </div>;
+  }
+}
 
 HeaderUi.propTypes = {
   status: React.PropTypes.instanceOf(Immutable.Record).isRequired,
+  startTimer: React.PropTypes.func.isRequired,
 };
 
 const styles = {
