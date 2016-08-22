@@ -1,20 +1,30 @@
 import React from 'react';
+import Header from '@components/Header';
 import Board from '@components/Board';
 
 
 function App(props) {
   return <div style={styles.app} >
-    <Board />
+    <Header />
+    <div style={styles.boardWrapper} >
+      <Board />
+    </div>
   </div>;
 }
 
 const styles = {
   app: {
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: 'column',
     width: '100vw',
     height: '100vh',
+    fontFamily: 'Roboto Condensed, sans-serif',
+  },
+  boardWrapper: {
+    flexGrow: 1,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 };
 
