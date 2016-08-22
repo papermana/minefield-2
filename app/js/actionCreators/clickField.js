@@ -1,6 +1,7 @@
 import findNeighbors from '@utils/findNeighbors';
 import {
   CLICK_FIELD,
+  LOSE_GAME,
 } from './types';
 
 
@@ -16,10 +17,10 @@ const clickField = id => {
 
       if (value === 'mine') {
         alreadyUncovered.add(id);
-        // dispatch({
-        //   type: 'LOSE_GAME',
-        //   data: undefined,
-        // });
+        dispatch({
+          type: LOSE_GAME,
+          data: undefined,
+        });
       }
       else if (value !== 0) {
         alreadyUncovered.add(id);

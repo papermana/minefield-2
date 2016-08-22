@@ -1,6 +1,7 @@
 import {
   FLAG_FIELD,
   UNFLAG_FIELD,
+  WIN_GAME,
 } from './types';
 
 
@@ -22,7 +23,10 @@ const rightClickField = id => {
         layout.get(id) === 'mine' &&
         status.minesFlagged === config.mines - 1
       ) {
-        //  WIN_THE_GAME
+        dispatch({
+          type: WIN_GAME,
+          data: undefined,
+        });
       }
     }
     else if (playerActions.get(id) === 'flagged') {
