@@ -43,6 +43,7 @@ describe('`dataTypes` - A collection of `Immutable.Record` classes for use as ap
       time: 0,
       flagsDeployed: 0,
       minesFlagged: 0,
+      state: 'STATE_GOING',
     };
 
     it('should return a proper instance', () => {
@@ -62,6 +63,15 @@ describe('`dataTypes` - A collection of `Immutable.Record` classes for use as ap
       expect(result.time).toBe(50);
       expect(result.flagsDeployed).toBe(defaultValues.flagsDeployed);
       expect(result.minesFlagged).toBe(2);
+    });
+
+    it('should have getters returning constants allowed on the property `state`', () => {
+      const result = new Status();
+
+      expect(result.STATE_GOING).toBe('STATE_GOING');
+      expect(result.STATE_PAUSED).toBe('STATE_PAUSED');
+      expect(result.STATE_WON).toBe('STATE_WON');
+      expect(result.STATE_LOST).toBe('STATE_LOST');
     });
   });
 
@@ -91,6 +101,7 @@ describe('`dataTypes` - A collection of `Immutable.Record` classes for use as ap
         time: 30,
         flagsDeployed: 1,
         minesFlagged: 0,
+        state: 'STATE_PAUSED',
       };
       const boardLayoutData = [1, 1, 0, 0, 'mine', 'mine', 3, 2, 0, 0];
       const playerActionsData = [undefined, undefined, 'flagged', 'clicked'];

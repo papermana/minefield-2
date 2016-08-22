@@ -12,7 +12,24 @@ class Status extends new Immutable.Record({
   time: 0,
   flagsDeployed: 0,
   minesFlagged: 0,
-}) {}
+  state: 'STATE_GOING',
+}) {
+  get STATE_GOING() {
+    return 'STATE_GOING';
+  }
+
+  get STATE_PAUSED() {
+    return 'STATE_PAUSED';
+  }
+
+  get STATE_WON() {
+    return 'STATE_WON';
+  }
+
+  get STATE_LOST() {
+    return 'STATE_LOST';
+  }
+}
 
 class State extends new Immutable.Record({
   boardConfig: new BoardConfig(),
