@@ -1,6 +1,7 @@
 import * as types from './types';
 import clickField from './clickField';
 import rightClickField from './rightClickField';
+import startTimer from './startTimer';
 
 
 const actionCreators = {};
@@ -16,6 +17,7 @@ for (const type in types) {
 
 actionCreators.clickField = clickField;
 actionCreators.rightClickField = rightClickField;
+actionCreators.startTimer = startTimer;
 
 
 export default actionCreators;
