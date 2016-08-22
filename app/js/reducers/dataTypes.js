@@ -29,28 +29,30 @@ class State extends Immutable.Record({
   playerActions: Immutable.List(),
 }) {
   constructor(data) {
+    const dataToPass = Object.assign({}, data);
+
     if (data) {
       if (data.boardConfig) {
-        data.boardConfig = new BoardConfig(data.boardConfig);
+        dataToPass.boardConfig = new BoardConfig(data.boardConfig);
       }
 
       if (data.status) {
-        data.status = new Status(data.status);
+        dataToPass.status = new Status(data.status);
       }
 
       if (data.boardLayout) {
-        data.boardLayout = Immutable.List(data.boardLayout);
+        dataToPass.boardLayout = Immutable.List(data.boardLayout);
       }
       else {
-        data.boardLayout = createBoardLayout(data.boardConfig || new BoardConfig());
+        dataToPass.boardLayout = createBoardLayout(data.boardConfig || new BoardConfig());
       }
 
       if (data.playerActions) {
-        data.playerActions = Immutable.List(data.playerActions);
+        dataToPass.playerActions = Immutable.List(data.playerActions);
       }
     }
 
-    super(data);
+    super(dataToPass);
   }
 }
 
