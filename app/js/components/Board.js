@@ -4,9 +4,8 @@ import actionCreators from '@js/actionCreators';
 
 
 const {
-  flagField,
-  unflagField,
   clickField,
+  rightClickField,
 } = actionCreators;
 
 const mapStateToProps = state => ({
@@ -15,11 +14,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  flagField(id) {
-    dispatch(flagField(id));
-  },
-  unflagField(id) {
-    dispatch(unflagField(id));
+  rightClickField(id) {
+    dispatch(rightClickField(id));
   },
   clickField(id) {
     dispatch(clickField(id));

@@ -24,12 +24,28 @@ const reducers = (state = new State(), action) => {
     });
   }
   else if (action.type === FLAG_FIELD) {
-    return state
-    .setIn(['playerActions', action.data], 'flagged');
+    state = state
+    .setIn(['playerActions', action.data], 'flagged')
+    .updateIn(['status', 'flagsDeployed'], flags => ++flags);
+
+    if (state.boardLayout.get(action.data) === 'mine') {
+      state = state
+      .updateIn(['status', 'minesFlagged'], mines => ++mines);
+    }
+
+    return state;
   }
   else if (action.type === UNFLAG_FIELD) {
-    return state
-    .setIn(['playerActions', action.data], undefined);
+    state = state
+    .setIn(['playerActions', action.data], undefined)
+    .updateIn(['status', 'flagsDeployed'], flags => --flags);
+
+    if (state.boardLayout.get(action.data) === 'mine') {
+      state = state
+      .updateIn(['status', 'minesFlagged'], mines => --mines);
+    }
+
+    return state;
   }
   else {
     return state;

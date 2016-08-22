@@ -12,7 +12,7 @@ class Field extends React.PureComponent {
     this.hoverStartFunc = this.hoverStartFunc.bind(this);
     this.hoverEndFunc = this.hoverEndFunc.bind(this);
     this.clickField = this.clickField.bind(this);
-    this.flagField = this.flagField.bind(this);
+    this.rightClickField = this.rightClickField.bind(this);
   }
 
   hoverStartFunc() {
@@ -33,15 +33,10 @@ class Field extends React.PureComponent {
     }
   }
 
-  flagField(e) {
+  rightClickField(e) {
     e.preventDefault();
 
-    if (this.props.action === undefined) {
-      this.props.flagField(this.props.id);
-    }
-    else if (this.props.action === 'flagged') {
-      this.props.unflagField(this.props.id);
-    }
+    this.props.rightClickField(this.props.id);
   }
 
   render() {
@@ -72,7 +67,7 @@ class Field extends React.PureComponent {
       onMouseOver={this.hoverStartFunc}
       onMouseOut={this.hoverEndFunc}
       onClick={this.clickField}
-      onContextMenu={this.flagField} >
+      onContextMenu={this.rightClickField} >
       {content}
     </button>;
   }
@@ -90,8 +85,7 @@ Field.propTypes = {
     'clicked',
   ]),
   clickField: React.PropTypes.func.isRequired,
-  flagField: React.PropTypes.func.isRequired,
-  unflagField: React.PropTypes.func.isRequired,
+  rightClickField: React.PropTypes.func.isRequired,
 };
 
 const styles = {
