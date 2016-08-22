@@ -1,5 +1,6 @@
 import React from 'react';
 import Immutable from 'immutable';
+import IconButton from '@components/IconButton';
 import formatTime from '@utils/formatTime';
 
 
@@ -11,6 +12,7 @@ class HeaderUi extends React.PureComponent {
   render() {
     return <div style={styles.wrapper} >
       <div style={styles.staticBar} >
+        <IconButton action="menu" />
         <div style={styles.message} >
           {
             this.props.status.state === this.props.status.STATE_PAUSED &&
