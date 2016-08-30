@@ -21,9 +21,41 @@ const {
   START_NEW_GAME,
 } = types;
 
+const winGameReducer = state => {
+  if (
+    state.status.minesFlagged === state.boardConfig.mines &&
+    state.status.flagsDeployed === state.status.minesFlagged &&
+    !state.playerActions.includes(undefined)
+  ) {
+    state = state
+    .update('status', status => {
+      return status
+      .set('state', status.STATE_WON);
+    });
+  }
+
+  return state;
+};
+
+const loseGameReducer = (state, action) => {
+  if (
+    action.type === CLICK_FIELD &&
+    action.data.size === 1 &&
+    state.boardLayout.get([...action.data][0]) === 'mine'
+  ) {
+    state = state
+    .update('status', status => {
+      return status
+      .set('state', status.STATE_LOST);
+    });
+  }
+
+  return state;
+};
+
 const reducers = (state = new State(), action) => {
   if (action.type === CLICK_FIELD) {
-    return state
+    state = state
     .update('playerActions', list => {
       return list.withMutations(listMut => {
         action.data.forEach(entry => {
@@ -41,8 +73,6 @@ const reducers = (state = new State(), action) => {
       state = state
       .updateIn(['status', 'minesFlagged'], mines => ++mines);
     }
-
-    return state;
   }
   else if (action.type === UNFLAG_FIELD) {
     state = state
@@ -53,45 +83,31 @@ const reducers = (state = new State(), action) => {
       state = state
       .updateIn(['status', 'minesFlagged'], mines => --mines);
     }
-
-    return state;
   }
   else if (action.type === INCREMENT_TIMER) {
-    return state
+    state = state
     .updateIn(['status', 'time'], time => ++time);
   }
-  else if (action.type === LOSE_GAME) {
-    return state
-    .update('status', status => {
-      return status
-      .set('state', status.STATE_LOST);
-    });
-  }
-  else if (action.type === WIN_GAME) {
-    return state
-    .update('status', status => {
-      return status
-      .set('state', status.STATE_WON);
-    });
-  }
   else if (action.type === SHOW_TOPBAR) {
-    return state
+    state = state
     .setIn(['uiState', 'topbarActive'], true);
   }
   else if (action.type === HIDE_TOPBAR) {
-    return state
+    state = state
     .setIn(['uiState', 'topbarActive'], false);
   }
   else if (action.type === START_NEW_GAME) {
-    return state
+    state = state
     .set('boardLayout', createBoardLayout(state.get('boardConfig')))
     .set('playerActions', new Immutable.List())
     .set('status', new Status())
     .setIn(['uiState', 'topbarActive'], false);
   }
-  else {
-    return state;
-  }
+
+  state = winGameReducer(state, action);
+  state = loseGameReducer(state, action);
+
+  return state;
 };
 
 

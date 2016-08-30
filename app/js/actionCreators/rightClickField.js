@@ -18,16 +18,6 @@ const rightClickField = id => {
         type: FLAG_FIELD,
         data: id,
       });
-
-      if (
-        layout.get(id) === 'mine' &&
-        status.minesFlagged === config.mines - 1
-      ) {
-        dispatch({
-          type: WIN_GAME,
-          data: undefined,
-        });
-      }
     }
     else if (playerActions.get(id) === 'flagged') {
       dispatch({

@@ -17,10 +17,6 @@ const clickField = id => {
 
       if (value === 'mine') {
         alreadyUncovered.add(currentId);
-        dispatch({
-          type: LOSE_GAME,
-          data: undefined,
-        });
       }
       else if (value !== 0) {
         alreadyUncovered.add(currentId);
