@@ -48,20 +48,6 @@ class HeaderUi extends React.PureComponent {
       <div style={styles.display} >
         <IconButton action="menu"
           onClick={this.props.showTopbar} />
-        <div style={styles.message} >
-          {
-            this.props.status.state === gameStates.STATE_PAUSED &&
-            'Paused'
-          }
-          {
-            this.props.status.state === gameStates.STATE_LOST &&
-            'BOOM! You lose.'
-          }
-          {
-            this.props.status.state === gameStates.STATE_WON &&
-            'Congratulations! You win'
-          }
-        </div>
         <div style={styles.gameInfo} >
           <IconButton action={pauseUnpauseButton}
             onClick={this.pauseUnpause} />
@@ -120,9 +106,6 @@ const styles = {
     fontFamily: 'Roboto Condensed, sans-serif',
     fontSize: 24,
     boxSizing: 'border-box',
-  },
-  message: {
-    textAlign: 'center',
   },
   gameInfo: {
     display: 'flex',

@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '@components/Header';
 import Board from '@components/Board';
+import MessageDisplay from '@components/MessageDisplay';
 
 
 const App = () => {
@@ -9,6 +10,7 @@ const App = () => {
     <div style={styles.boardWrapper} >
       <Board />
     </div>
+    <MessageDisplay />
   </div>;
 };
 
