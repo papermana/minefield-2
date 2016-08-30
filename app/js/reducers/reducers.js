@@ -122,8 +122,6 @@ const reducers = (state = new State(), action) => {
   state = winGameReducer(state, action);
   state = loseGameReducer(state, action);
 
-  localStorage.setItem('savedGame', JSON.stringify(state));
-
   return state;
 };
 

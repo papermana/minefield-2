@@ -5,13 +5,17 @@ import ReduxThunk from 'redux-thunk';
 import {
   Provider,
 } from 'react-redux';
+import saveGame from '@js/utils/middlewareSaveGame';
 import reducers from '@js/reducers';
 import App from '@components/App';
 
 
 const store = Redux.createStore(
   reducers,
-  Redux.applyMiddleware(ReduxThunk)
+  Redux.applyMiddleware(
+    ReduxThunk,
+    saveGame
+  )
 );
 
 document.addEventListener('DOMContentLoaded', () => {
