@@ -59,13 +59,16 @@ class Field extends React.PureComponent {
         style = styles.fieldClickedNonNull;
       }
     }
-    else if (this.props.action === 'flagged') {
-      content = <img src="assets/flag.svg"
-        width="50"
-        height="50" />;
-    }
-    else if (this.state.hovered) {
-      style = styles.fieldHovered;
+    else {
+      if (this.props.action === 'flagged') {
+        content = <img src="assets/flag.svg"
+          width="50"
+          height="50" />;
+      }
+
+      if (this.state.hovered) {
+        style = styles.fieldHovered;
+      }
     }
 
     return <button style={style}
