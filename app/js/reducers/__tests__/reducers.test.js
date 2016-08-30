@@ -216,4 +216,73 @@ describe('`reducers.js` - The main reducer in the app', () => {
     });
     expect(state.status.state).toBe(gameStates.STATE_GOING);
   });
+
+  it('should set the `status.state` property to `STATE_WON` if all mines are flagged, only mines are flagged, and all other fields have been uncovered', () => {
+    let state;
+
+    //  Win if all mines are flagged:
+    state = new State({
+      boardLayout: [1, 1, 'mine', 'mine'],
+      playerActions: ['clicked', 'clicked', 'flagged'],
+      status: new Status({
+        flagsDeployed: 1,
+        minesFlagged: 1,
+      }),
+      boardConfig: new BoardConfig({
+        mines: 2,
+      }),
+    });
+    expect(state.status.state).toBe(gameStates.STATE_GOING);
+
+    state = reducers(state, {
+      type: FLAG_FIELD,
+      data: 3,
+    });
+    expect(state.status.state).toBe(gameStates.STATE_WON);
+
+    //  Win only if nothing besides mines is flagged and everything is uncovered:
+    state = new State({
+      boardLayout: [1, 1, 'mine', 'mine'],
+      playerActions: ['flagged', 'clicked', 'flagged'],
+      status: new Status({
+        flagsDeployed: 2,
+        minesFlagged: 1,
+      }),
+      boardConfig: new BoardConfig({
+        mines: 2,
+      }),
+    });
+    expect(state.status.state).toBe(gameStates.STATE_GOING);
+
+    state = reducers(state, {
+      type: FLAG_FIELD,
+      data: 3,
+    });
+    expect(state.status.state).toBe(gameStates.STATE_GOING);
+
+    state = reducers(state, {
+      type: UNFLAG_FIELD,
+      data: 0,
+    });
+    expect(state.status.state).toBe(gameStates.STATE_GOING);
+
+    state = reducers(state, {
+      type: CLICK_FIELD,
+      data: new Set([0]),
+    });
+    expect(state.status.state).toBe(gameStates.STATE_WON);
+  });
+
+  it('should set the `status.state` property to `STATE_LOST` if a field has been clicked that contains a mine', () => {
+    let state = new State({
+      boardLayout: [1, 'mine'],
+    });
+
+    state = reducers(state, {
+      type: CLICK_FIELD,
+      data: new Set([1]),
+    });
+    expect(state.status.state).toBe(gameStates.STATE_LOST);
+  });
+
 });
