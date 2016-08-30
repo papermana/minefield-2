@@ -44,6 +44,20 @@ describe('`reducers.js` - The main reducer in the app', () => {
     expect(result).toBe(state);
   });
 
+  //  We shouldn't have side effects in reducers.
+  //  Is there any other way of doing is?
+  it('should set state in local storage every time', () => {
+    reducers(undefined, {
+      type: 'fakeAction',
+      data: undefined,
+    });
+
+    expect(window.localStorage.setItem).toBeCalledWith(
+      'savedGame',
+      JSON.stringify(new State())
+    );
+  });
+
   it('should, in case of a `CLICK_FIELD` action, take the array passed in as action data, and for each value in that array set "clicked" in the `playerActions` property at an index equal to the value', () => {
     const result = reducers(undefined, {
       type: CLICK_FIELD,
