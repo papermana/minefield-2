@@ -11,7 +11,8 @@ const BoardUi = props => {
       id={i}
       action={props.playerActions.get(i)}
       clickField={props.clickField}
-      rightClickField={props.rightClickField} />
+      rightClickField={props.rightClickField}
+      status={props.status} />
   ));
 
   return <div style={styles.board} >
@@ -24,6 +25,7 @@ BoardUi.propTypes = {
   layout: React.PropTypes.instanceOf(Immutable.List).isRequired,
   playerActions: React.PropTypes.instanceOf(Immutable.List).isRequired,
   rightClickField: React.PropTypes.func.isRequired,
+  status: React.PropTypes.string.isRequired,
 };
 
 const styles = {

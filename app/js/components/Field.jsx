@@ -1,6 +1,11 @@
 import React from 'react';
 
 
+const contentImage = name => <img src={`assets/${name}.svg`}
+  width="50"
+  height="50"
+  draggable="false" />;
+
 class Field extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -28,7 +33,7 @@ class Field extends React.PureComponent {
   }
 
   clickField() {
-    if (this.props.action === undefined) {
+    if (this.props.status === 'STATE_GOING' && this.props.action === undefined) {
       this.props.clickField(this.props.id);
     }
   }
@@ -36,7 +41,9 @@ class Field extends React.PureComponent {
   rightClickField(e) {
     e.preventDefault();
 
-    this.props.rightClickField(this.props.id);
+    if (this.props.status === 'STATE_GOING' && this.props.action !== 'clicked') {
+      this.props.rightClickField(this.props.id);
+    }
   }
 
   render() {
@@ -47,9 +54,7 @@ class Field extends React.PureComponent {
       content = this.props.value;
 
       if (content === 'mine') {
-        content = <img src="assets/mine-exploded.svg"
-          width="50"
-          height="50" />;
+        content = contentImage('mine-exploded');
       }
 
       if (content === 0) {
@@ -59,16 +64,30 @@ class Field extends React.PureComponent {
         style = styles.fieldClickedNonNull;
       }
     }
-    else {
-      if (this.props.action === 'flagged') {
-        content = <img src="assets/flag.svg"
-          width="50"
-          height="50" />;
+    else if (this.props.action === 'flagged') {
+      content = contentImage('flag');
+    }
+    else if (
+      this.props.action === undefined &&
+      (
+        this.props.status === 'STATE_WON' ||
+        this.props.status === 'STATE_LOST'
+      )
+    ) {
+      if (this.props.value === 'mine') {
+        content = contentImage('mine');
       }
+      else {
+        content = this.props.value;
+      }
+    }
 
-      if (this.state.hovered) {
-        style = styles.fieldHovered;
-      }
+    if (
+      this.props.action !== 'clicked' &&
+      this.props.status === 'STATE_GOING' &&
+      this.state.hovered
+    ) {
+      style = styles.fieldHovered;
     }
 
     return <button style={style}
@@ -90,6 +109,7 @@ Field.propTypes = {
   clickField: React.PropTypes.func.isRequired,
   id: React.PropTypes.number.isRequired,
   rightClickField: React.PropTypes.func.isRequired,
+  status: React.PropTypes.string.isRequired,
   value: React.PropTypes.oneOfType([
     React.PropTypes.oneOf(['mine']),
     React.PropTypes.number,
@@ -103,7 +123,6 @@ const styles = {
     backgroundColor: 'rgb(222, 215, 223)',
     fontFamily: 'Roboto Condensed, sans-serif',
     fontSize: 24,
-    cursor: 'pointer',
     MsUserSelect: 'none',
     MoztUserSelect: 'none',
     WebkitUserSelect: 'none',
@@ -117,6 +136,7 @@ const styles = {
 
 styles.fieldHovered = Object.assign({}, styles.field, {
   backgroundColor: 'rgba(192, 185, 193, 1)',
+  cursor: 'pointer',
 });
 
 styles.fieldClicked = Object.assign({}, styles.field, {

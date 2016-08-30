@@ -11,6 +11,7 @@ const {
 const mapStateToProps = state => ({
   layout: state.boardLayout,
   playerActions: state.playerActions,
+  status: state.status.state,
 });
 
 const mapDispatchToProps = dispatch => ({
