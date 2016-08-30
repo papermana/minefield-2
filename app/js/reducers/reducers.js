@@ -3,7 +3,7 @@ import {
   gameStates,
   Status,
   State,
-} from './dataTypes';
+} from '@js/dataTypes';
 import {
   types,
 } from '@js/actionCreators';

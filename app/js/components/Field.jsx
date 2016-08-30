@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   gameStates,
-} from '@js/reducers/dataTypes';
+} from '@js/dataTypes';
 
 
 const contentImage = name => <img src={`assets/${name}.svg`}

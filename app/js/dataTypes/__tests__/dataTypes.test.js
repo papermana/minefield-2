@@ -1,4 +1,4 @@
-jest.unmock('@js/reducers/dataTypes');
+jest.unmock('@js/dataTypes');
 
 import Immutable from 'immutable';
 import {
@@ -7,7 +7,7 @@ import {
   Status,
   UiState,
   State,
-} from '@js/reducers/dataTypes';
+} from '@js/dataTypes';
 import createBoardLayout from '@utils/createBoardLayout';
 
 

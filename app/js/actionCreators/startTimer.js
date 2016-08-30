@@ -3,7 +3,7 @@ import {
 } from './types';
 import {
   gameStates,
-} from '@js/reducers/dataTypes';
+} from '@js/dataTypes';
 
 
 const startTimer = () => {

@@ -1,6 +1,6 @@
 jest.unmock('@utils/createBoardLayout');
 jest.unmock('@utils/findNeighbors');
-jest.unmock('@js/reducers/dataTypes');
+jest.unmock('@js/dataTypes');
 
 import createBoardLayout from '@utils/createBoardLayout';
 import {
@@ -8,7 +8,7 @@ import {
 } from '@utils/createBoardLayout';
 import {
   BoardConfig,
-} from '@js/reducers/dataTypes';
+} from '@js/dataTypes';
 import Immutable from 'immutable';
 
 

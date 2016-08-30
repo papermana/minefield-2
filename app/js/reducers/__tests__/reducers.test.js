@@ -1,5 +1,5 @@
 jest.unmock('@js/reducers');
-jest.unmock('@js/reducers/dataTypes');
+jest.unmock('@js/dataTypes');
 jest.unmock('@js/actionCreators');
 
 import Immutable from 'immutable';
@@ -10,7 +10,7 @@ import {
   BoardConfig,
   UiState,
   State,
-} from '@js/reducers/dataTypes';
+} from '@js/dataTypes';
 import {
   types,
 } from '@js/actionCreators';

@@ -1,7 +1,7 @@
 jest.unmock('@js/actionCreators/clickField');
 jest.unmock('@js/actionCreators/types');
 jest.unmock('@utils/findNeighbors');
-jest.unmock('@js/reducers/dataTypes');
+jest.unmock('@js/dataTypes');
 jest.unmock('redux-mock-store');
 jest.unmock('redux-thunk');
 
@@ -10,7 +10,7 @@ import clickField, {
 } from '@js/actionCreators/clickField';
 import {
   State,
-} from '@js/reducers/dataTypes';
+} from '@js/dataTypes';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 

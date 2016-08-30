@@ -1,10 +1,10 @@
 jest.unmock('@utils/findNeighbors');
-jest.unmock('@js/reducers/dataTypes');
+jest.unmock('@js/dataTypes');
 
 import findNeighbors from '@utils/findNeighbors';
 import {
   BoardConfig,
-} from '@js/reducers/dataTypes';
+} from '@js/dataTypes';
 
 
 describe('`findNeighbors()` -- function which finds id\'s of all the fields surrounding the selected field', () => {

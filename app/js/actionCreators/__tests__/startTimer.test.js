@@ -1,6 +1,6 @@
 jest.unmock('@js/actionCreators/startTimer');
 jest.unmock('@js/actionCreators/types');
-jest.unmock('@js/reducers/dataTypes');
+jest.unmock('@js/dataTypes');
 jest.unmock('redux-mock-store');
 jest.unmock('redux-thunk');
 
@@ -11,7 +11,7 @@ import {
 import {
   gameStates,
   State,
-} from '@js/reducers/dataTypes';
+} from '@js/dataTypes';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 

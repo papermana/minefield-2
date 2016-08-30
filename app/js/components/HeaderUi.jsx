@@ -2,7 +2,7 @@ import React from 'react';
 import Immutable from 'immutable';
 import {
   gameStates,
-} from '@js/reducers/dataTypes';
+} from '@js/dataTypes';
 import IconButton from '@components/IconButton';
 import TextButton from '@components/TextButton';
 import formatTime from '@utils/formatTime';
