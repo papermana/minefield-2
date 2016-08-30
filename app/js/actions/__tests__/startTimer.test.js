@@ -1,13 +1,13 @@
-jest.unmock('@js/actionCreators/startTimer');
-jest.unmock('@js/actionCreators/types');
+jest.unmock('@js/actions/startTimer');
+jest.unmock('@js/actions/actionTypes');
 jest.unmock('@js/dataTypes');
 jest.unmock('redux-mock-store');
 jest.unmock('redux-thunk');
 
-import startTimer from '@js/actionCreators/startTimer';
+import startTimer from '@js/actions/startTimer';
 import {
   INCREMENT_TIMER,
-} from '@js/actionCreators/types';
+} from '@js/actions/actionTypes';
 import {
   gameStates,
   State,

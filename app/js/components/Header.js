@@ -1,6 +1,6 @@
 import * as ReactRedux from 'react-redux';
 import HeaderUi from '@components/HeaderUi';
-import actionCreators from '@js/actionCreators';
+import actionCreators from '@js/actions';
 
 
 const mapStateToProps = state => ({

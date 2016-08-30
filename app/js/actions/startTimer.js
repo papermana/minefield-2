@@ -1,6 +1,6 @@
 import {
   INCREMENT_TIMER,
-} from './types';
+} from '@js/actions/actionTypes';
 import {
   gameStates,
 } from '@js/dataTypes';

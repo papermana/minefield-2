@@ -1,7 +1,7 @@
 import findNeighbors from '@utils/findNeighbors';
 import {
   CLICK_FIELD,
-} from './types';
+} from '@js/actions/actionTypes';
 
 
 const clickField = id => {

@@ -1,6 +1,6 @@
 jest.unmock('@js/reducers');
 jest.unmock('@js/dataTypes');
-jest.unmock('@js/actionCreators');
+jest.unmock('@js/actions');
 
 import Immutable from 'immutable';
 import reducers from '@js/reducers';
@@ -13,7 +13,7 @@ import {
 } from '@js/dataTypes';
 import {
   types,
-} from '@js/actionCreators';
+} from '@js/actions';
 import createBoardLayout from '@utils/createBoardLayout';
 
 

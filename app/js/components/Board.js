@@ -1,6 +1,6 @@
 import * as ReactRedux from 'react-redux';
 import BoardUi from '@components/BoardUi';
-import actionCreators from '@js/actionCreators';
+import actionCreators from '@js/actions';
 
 
 const {

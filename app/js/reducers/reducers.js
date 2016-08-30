@@ -6,7 +6,7 @@ import {
 } from '@js/dataTypes';
 import {
   types,
-} from '@js/actionCreators';
+} from '@js/actions';
 import createBoardLayout from '@utils/createBoardLayout';
 
 

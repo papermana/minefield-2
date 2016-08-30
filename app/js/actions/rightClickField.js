@@ -1,7 +1,7 @@
 import {
   FLAG_FIELD,
   UNFLAG_FIELD,
-} from './types';
+} from '@js/actions/actionTypes';
 
 
 const rightClickField = id => {
