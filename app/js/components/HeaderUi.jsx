@@ -32,6 +32,9 @@ class HeaderUi extends React.PureComponent {
     const topbarStyle = this.props.uiState.topbarActive
       ? styles.topbarActive
       : styles.topbar;
+    const pauseUnpauseButton = this.props.status.state === gameStates.STATE_GOING
+      ? 'pause'
+      : 'play';
 
     return <div style={styles.wrapper} >
       <div style={topbarStyle} >
@@ -60,9 +63,8 @@ class HeaderUi extends React.PureComponent {
           }
         </div>
         <div style={styles.gameInfo} >
-          <button onClick={this.pauseUnpause} >
-            Pause/unpause
-          </button>
+          <IconButton action={pauseUnpauseButton}
+            onClick={this.pauseUnpause} />
           <div style={styles.flagsCounter} >
             {this.props.status.flagsDeployed}
           </div>

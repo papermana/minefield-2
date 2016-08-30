@@ -2,14 +2,16 @@ import React from 'react';
 
 
 const src = {
-  menu: 'assets/hamburger.svg',
-  back: 'assets/back-arrow.svg',
+  menu: 'hamburger',
+  back: 'back-arrow',
+  pause: 'pause',
+  play: 'play',
 };
 
 const IconButton = props => {
   return <button style={styles.button}
     {...props} >
-    <img src={src[props.action]}
+    <img src={`assets/${src[props.action]}.svg`}
       width="24"
       height="24"
       draggable={false} />
@@ -20,6 +22,8 @@ IconButton.propTypes = {
   action: React.PropTypes.oneOf([
     'menu',
     'back',
+    'pause',
+    'play',
   ]).isRequired,
 };
 
