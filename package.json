@@ -36,6 +36,7 @@
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/jestPreprocessor.js",
+    "setupFiles": ["jestSetup.js"],
     "moduleFileExtensions": [
       "js",
       "jsx"

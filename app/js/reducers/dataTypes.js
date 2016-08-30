@@ -34,6 +34,21 @@ class State extends new Immutable.Record({
   uiState: new UiState(),
 }) {
   constructor(data) {
+    if (!data) {
+      data = JSON.parse(localStorage.getItem('savedGame'));
+      data.uiState = {};
+
+      if (
+        data.status &&
+        (
+          data.status.state === gameStates.STATE_LOST ||
+          data.status.state === gameStates.STATE_WON
+        )
+      ) {
+        data = undefined;
+      }
+    }
+
     const dataToPass = Object.assign({}, data);
 
     if (data) {
@@ -53,7 +68,8 @@ class State extends new Immutable.Record({
       }
 
       if (data.playerActions) {
-        dataToPass.playerActions = new Immutable.List(data.playerActions);
+        dataToPass.playerActions = new Immutable.List(data.playerActions)
+        .map(value => value === null ? undefined : value);
       }
 
       if (data.uiState) {

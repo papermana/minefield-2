@@ -154,6 +154,49 @@ describe('`dataTypes` - A collection of `Immutable.Record` classes for use as ap
       expect(result.uiState instanceof UiState).toBe(true);
       expect(result.uiState).toEqual(new UiState(uiStateData));
     });
+
+    it('should, if no values are provided as an argument try to get the saved game state from storage', () => {
+      const data = {
+        boardConfig: {
+          rows: 2,
+          columns: 10,
+          mines: 6,
+        },
+        status: {
+          time: 21,
+          flagsDeployed: 7,
+          minesFlagged: 3,
+          state: gameStates.STATE_GOING,
+        },
+        boardLayout: [1, 1, 0, 0, 'mine', 'mine', 3, 2, 0, 0],
+        playerActions: [undefined, undefined, 'flagged', 'clicked'],
+        uiState: defaultValues.uiState.toJS(),
+      };
+
+      window.localStorage.getItem = jest.fn(() => JSON.stringify(data));
+
+      expect(new State().toJS()).toEqual(data);
+    });
+
+    it('should ignore the `uiState` property when getting state from storage', () => {
+      window.localStorage.getItem = jest.fn(() => JSON.stringify({
+        uiState: {
+          topbarActive: true,
+        },
+      }));
+
+      expect(new State().toObject()).toEqual(defaultValues);
+    });
+
+    it('should ignore the data from storage if its `status.state` property is "STATE_WON" or "STATE_LOST"', () => {
+      window.localStorage.getItem = jest.fn(() => JSON.stringify({
+        status: {
+          state: gameStates.STATE_WON,
+        },
+      }));
+
+      expect(new State().toObject()).toEqual(defaultValues);
+    });
   });
 
 });
