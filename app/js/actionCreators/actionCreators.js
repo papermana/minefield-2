@@ -19,6 +19,16 @@ const startNewGame = () => ({
   data: undefined,
 });
 
+const pauseGame = () => ({
+  type: types.PAUSE_GAME,
+  data: undefined,
+});
+
+const unpauseGame = () => ({
+  type: types.UNPAUSE_GAME,
+  data: undefined,
+});
+
 
 export default {
   clickField,
@@ -27,6 +37,8 @@ export default {
   showTopbar,
   hideTopbar,
   startNewGame,
+  pauseGame,
+  unpauseGame,
 };
 export {
   types,

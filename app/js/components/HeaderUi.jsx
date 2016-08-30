@@ -9,8 +9,23 @@ import formatTime from '@utils/formatTime';
 
 
 class HeaderUi extends React.PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.pauseUnpause = this.pauseUnpause.bind(this);
+  }
+
   componentDidMount() {
     this.props.startTimer();
+  }
+
+  pauseUnpause() {
+    if (this.props.status.state === gameStates.STATE_GOING) {
+      this.props.pauseGame();
+    }
+    else if (this.props.status.state === gameStates.STATE_PAUSED) {
+      this.props.unpauseGame();
+    }
   }
 
   render() {
@@ -45,6 +60,9 @@ class HeaderUi extends React.PureComponent {
           }
         </div>
         <div style={styles.gameInfo} >
+          <button onClick={this.pauseUnpause} >
+            Pause/unpause
+          </button>
           <div style={styles.flagsCounter} >
             {this.props.status.flagsDeployed}
           </div>
@@ -59,11 +77,13 @@ class HeaderUi extends React.PureComponent {
 
 HeaderUi.propTypes = {
   hideTopbar: React.PropTypes.func.isRequired,
+  pauseGame: React.PropTypes.func.isRequired,
   showTopbar: React.PropTypes.func.isRequired,
   startNewGame: React.PropTypes.func.isRequired,
   startTimer: React.PropTypes.func.isRequired,
   status: React.PropTypes.instanceOf(Immutable.Record).isRequired,
   uiState: React.PropTypes.instanceOf(Immutable.Record).isRequired,
+  unpauseGame: React.PropTypes.func.isRequired,
 };
 
 const styles = {

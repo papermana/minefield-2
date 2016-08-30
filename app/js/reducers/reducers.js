@@ -18,6 +18,8 @@ const {
   SHOW_TOPBAR,
   HIDE_TOPBAR,
   START_NEW_GAME,
+  PAUSE_GAME,
+  UNPAUSE_GAME,
 } = types;
 
 const winGameReducer = state => {
@@ -101,6 +103,20 @@ const reducers = (state = new State(), action) => {
     .set('playerActions', new Immutable.List())
     .set('status', new Status())
     .setIn(['uiState', 'topbarActive'], false);
+  }
+  else if (action.type === PAUSE_GAME) {
+    state = state
+    .update('status', status => {
+      return status
+      .set('state', gameStates.STATE_PAUSED);
+    });
+  }
+  else if (action.type === UNPAUSE_GAME) {
+    state = state
+    .update('status', status => {
+      return status
+      .set('state', gameStates.STATE_GOING);
+    });
   }
 
   state = winGameReducer(state, action);

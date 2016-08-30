@@ -5,6 +5,7 @@ jest.unmock('@js/actionCreators');
 import Immutable from 'immutable';
 import reducers from '@js/reducers';
 import {
+  gameStates,
   Status,
   BoardConfig,
   UiState,
@@ -25,6 +26,8 @@ const {
   SHOW_TOPBAR,
   HIDE_TOPBAR,
   START_NEW_GAME,
+  PAUSE_GAME,
+  UNPAUSE_GAME,
 } = types;
 
 describe('`reducers.js` - The main reducer in the app', () => {
@@ -194,5 +197,23 @@ describe('`reducers.js` - The main reducer in the app', () => {
     expect(result.uiState.topbarActive).toBe(false);
     //  The rest remains the same:
     expect(result.boardConfig).toBe(state.boardConfig);
+  });
+
+  it('should change the property `status.state` when receiving actions `PAUSE_GAME` and `UNPAUSE_GAME`', () => {
+    let state = new State();
+
+    expect(state.status.state).toBe(gameStates.STATE_GOING);
+
+    state = reducers(state, {
+      type: PAUSE_GAME,
+      data: undefined,
+    });
+    expect(state.status.state).toBe(gameStates.STATE_PAUSED);
+
+    state = reducers(state, {
+      type: UNPAUSE_GAME,
+      data: undefined,
+    });
+    expect(state.status.state).toBe(gameStates.STATE_GOING);
   });
 });

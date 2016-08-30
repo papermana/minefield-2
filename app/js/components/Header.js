@@ -21,6 +21,12 @@ const mapDispatchToProps = dispatch => ({
   startNewGame() {
     dispatch(actionCreators.startNewGame());
   },
+  pauseGame() {
+    dispatch(actionCreators.pauseGame());
+  },
+  unpauseGame() {
+    dispatch(actionCreators.unpauseGame());
+  },
 });
 
 
