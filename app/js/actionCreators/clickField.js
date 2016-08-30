@@ -1,7 +1,6 @@
 import findNeighbors from '@utils/findNeighbors';
 import {
   CLICK_FIELD,
-  LOSE_GAME,
 } from './types';
 
 

@@ -1,7 +1,6 @@
 import {
   FLAG_FIELD,
   UNFLAG_FIELD,
-  WIN_GAME,
 } from './types';
 
 

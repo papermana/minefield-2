@@ -9,9 +9,6 @@ import clickField, {
   CLICK_FIELD,
 } from '@js/actionCreators/clickField';
 import {
-  LOSE_GAME,
-} from '@js/actionCreators/types';
-import {
   State,
 } from '@js/reducers/dataTypes';
 import configureStore from 'redux-mock-store';
@@ -32,25 +29,6 @@ describe('`clickField()` - An async action creators which decides which fields t
       {
         type: CLICK_FIELD,
         data: new Set([undefined]),
-      },
-    ]);
-  });
-
-  it('should send a `LOSE_GAME` action and uncover the clicked field if there is a mine under it', () => {
-    const store = mockStore(new State({
-      boardLayout: [0, 0, 'mine', 1],
-    }));
-
-    store.dispatch(clickField(2));
-
-    expect(store.getActions()).toEqual([
-      {
-        type: LOSE_GAME,
-        data: undefined,
-      },
-      {
-        type: CLICK_FIELD,
-        data: new Set([2]),
       },
     ]);
   });

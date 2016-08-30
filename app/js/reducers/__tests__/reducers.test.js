@@ -22,8 +22,6 @@ const {
   FLAG_FIELD,
   UNFLAG_FIELD,
   INCREMENT_TIMER,
-  LOSE_GAME,
-  WIN_GAME,
   SHOW_TOPBAR,
   HIDE_TOPBAR,
   START_NEW_GAME,
@@ -130,28 +128,6 @@ describe('`reducers.js` - The main reducer in the app', () => {
       data: undefined,
     });
     expect(state.status.time).toBe(1);
-  });
-
-  it('should, in case of a `LOSE_GAME` or `WIN_GAME` action, change the value of `status.state` to one of the constants available on the Status instance', () => {
-    const statusInstance = new Status();
-    const STATE_GOING = statusInstance.STATE_GOING;
-    const STATE_WON = statusInstance.STATE_WON;
-    const STATE_LOST = statusInstance.STATE_LOST;
-    let state = new State();
-
-    expect(state.status.state).toBe(STATE_GOING);
-
-    state = reducers(state, {
-      type: LOSE_GAME,
-      data: undefined,
-    });
-    expect(state.status.state).toBe(STATE_LOST);
-
-    state = reducers(state, {
-      type: WIN_GAME,
-      data: undefined,
-    });
-    expect(state.status.state).toBe(STATE_WON);
   });
 
   it('should change `uiState.topbarActive` in response to actions `SHOW_TOPBAR` and `HIDE_TOPBAR`', () => {
