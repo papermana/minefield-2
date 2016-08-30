@@ -8,15 +8,17 @@ const src = {
   play: 'play',
 };
 
-const IconButton = props => {
-  return <button style={styles.button}
-    {...props} >
-    <img src={`assets/${src[props.action]}.svg`}
-      width="24"
-      height="24"
-      draggable={false} />
-  </button>;
-};
+class IconButton extends React.PureComponent {
+  render() {
+    return <button style={styles.button}
+      {...this.props} >
+      <img src={`assets/${src[this.props.action]}.svg`}
+        width="24"
+        height="24"
+        draggable={false} />
+    </button>;
+  }
+}
 
 IconButton.propTypes = {
   action: React.PropTypes.oneOf([

@@ -4,27 +4,29 @@ import {
 } from '@js/dataTypes';
 
 
-const MessageDisplayUi = props => {
-  let message;
+class MessageDisplayUi extends React.PureComponent {
+  render() {
+    let message;
 
-  if (props.state === gameStates.STATE_PAUSED) {
-    message = 'Paused';
-  }
-  else if (props.state === gameStates.STATE_LOST) {
-    message = 'BOOM! You lose';
-  }
-  else if (props.state === gameStates.STATE_WON) {
-    message = 'Congratulations! You win';
-  }
+    if (this.props.state === gameStates.STATE_PAUSED) {
+      message = 'Paused';
+    }
+    else if (this.props.state === gameStates.STATE_LOST) {
+      message = 'BOOM! You lose';
+    }
+    else if (this.props.state === gameStates.STATE_WON) {
+      message = 'Congratulations! You win';
+    }
 
-  message = message === undefined ? null : <div style={styles.messageBar} >
-    {message}
-  </div>;
+    message = message === undefined ? null : <div style={styles.messageBar} >
+      {message}
+    </div>;
 
-  return <div style={styles.wrapper} >
-    {message}
-  </div>;
-};
+    return <div style={styles.wrapper} >
+      {message}
+    </div>;
+  }
+}
 
 MessageDisplayUi.propTypes = {
   state: React.PropTypes.string.isRequired,

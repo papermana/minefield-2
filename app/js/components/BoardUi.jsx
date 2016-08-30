@@ -3,22 +3,24 @@ import Immutable from 'immutable';
 import Field from '@components/Field';
 
 
-const BoardUi = props => {
-  const fields = props.layout
-  .map((field, i) => (
-    <Field key={i}
-      value={field}
-      id={i}
-      action={props.playerActions.get(i)}
-      clickField={props.clickField}
-      rightClickField={props.rightClickField}
-      status={props.status} />
-  ));
+class BoardUi extends React.PureComponent {
+  render() {
+    const fields = this.props.layout
+    .map((field, i) => (
+      <Field key={i}
+        value={field}
+        id={i}
+        action={this.props.playerActions.get(i)}
+        clickField={this.props.clickField}
+        rightClickField={this.props.rightClickField}
+        status={this.props.status} />
+    ));
 
-  return <div style={styles.board} >
-    {fields}
-  </div>;
-};
+    return <div style={styles.board} >
+      {fields}
+    </div>;
+  }
+}
 
 BoardUi.propTypes = {
   clickField: React.PropTypes.func.isRequired,

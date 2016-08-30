@@ -4,15 +4,17 @@ import Board from '@components/Board';
 import MessageDisplay from '@components/MessageDisplay';
 
 
-const App = () => {
-  return <div style={styles.app} >
-    <Header />
-    <div style={styles.boardWrapper} >
-      <Board />
-    </div>
-    <MessageDisplay />
-  </div>;
-};
+class App extends React.PureComponent {
+  render() {
+    return <div style={styles.app} >
+      <Header />
+      <div style={styles.boardWrapper} >
+        <Board />
+      </div>
+      <MessageDisplay />
+    </div>;
+  }
+}
 
 const styles = {
   app: {
