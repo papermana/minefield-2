@@ -9,6 +9,7 @@ import {
   INCREMENT_TIMER,
 } from '@js/actionCreators/types';
 import {
+  gameStates,
   State,
 } from '@js/reducers/dataTypes';
 import configureStore from 'redux-mock-store';
@@ -37,5 +38,36 @@ describe('`startTimer() - Action creator which dispatches an `INCREMENT_TIMER` a
       type: INCREMENT_TIMER,
       data: undefined,
     });
+  });
+
+  it('should not increment timer if `status.state` is not `STATE_GOING`', () => {
+    let store;
+
+    store = mockStore(new State({
+      status: {
+        state: gameStates.STATE_PAUSED,
+      },
+    }));
+    store.dispatch(startTimer());
+    jest.runOnlyPendingTimers();
+    expect(store.getActions().length).toBe(0);
+
+    store = mockStore(new State({
+      status: {
+        state: gameStates.STATE_WON,
+      },
+    }));
+    store.dispatch(startTimer());
+    jest.runOnlyPendingTimers();
+    expect(store.getActions().length).toBe(0);
+
+    store = mockStore(new State({
+      status: {
+        state: gameStates.STATE_LOST,
+      },
+    }));
+    store.dispatch(startTimer());
+    jest.runOnlyPendingTimers();
+    expect(store.getActions().length).toBe(0);
   });
 });
