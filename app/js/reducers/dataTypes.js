@@ -8,28 +8,19 @@ class BoardConfig extends new Immutable.Record({
   mines: 12,
 }) {}
 
+const gameStates = {
+  STATE_GOING: 'STATE_GOING',
+  STATE_PAUSED: 'STATE_PAUSED',
+  STATE_WON: 'STATE_WON',
+  STATE_LOST: 'STATE_LOST',
+};
+
 class Status extends new Immutable.Record({
   time: 0,
   flagsDeployed: 0,
   minesFlagged: 0,
-  state: 'STATE_GOING',
-}) {
-  get STATE_GOING() {
-    return 'STATE_GOING';
-  }
-
-  get STATE_PAUSED() {
-    return 'STATE_PAUSED';
-  }
-
-  get STATE_WON() {
-    return 'STATE_WON';
-  }
-
-  get STATE_LOST() {
-    return 'STATE_LOST';
-  }
-}
+  state: gameStates.STATE_GOING,
+}) {}
 
 class UiState extends new Immutable.Record({
   topbarActive: false,
@@ -80,4 +71,5 @@ export {
   BoardConfig,
   UiState,
   Status,
+  gameStates,
 };

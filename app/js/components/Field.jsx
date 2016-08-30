@@ -1,4 +1,7 @@
 import React from 'react';
+import {
+  gameStates,
+} from '@js/reducers/dataTypes';
 
 
 const contentImage = name => <img src={`assets/${name}.svg`}
@@ -33,7 +36,7 @@ class Field extends React.PureComponent {
   }
 
   clickField() {
-    if (this.props.status === 'STATE_GOING' && this.props.action === undefined) {
+    if (this.props.status === gameStates.STATE_GOING && this.props.action === undefined) {
       this.props.clickField(this.props.id);
     }
   }
@@ -41,7 +44,7 @@ class Field extends React.PureComponent {
   rightClickField(e) {
     e.preventDefault();
 
-    if (this.props.status === 'STATE_GOING' && this.props.action !== 'clicked') {
+    if (this.props.status === gameStates.STATE_GOING && this.props.action !== 'clicked') {
       this.props.rightClickField(this.props.id);
     }
   }
@@ -70,8 +73,8 @@ class Field extends React.PureComponent {
     else if (
       this.props.action === undefined &&
       (
-        this.props.status === 'STATE_WON' ||
-        this.props.status === 'STATE_LOST'
+        this.props.status === gameStates.STATE_WON ||
+        this.props.status === gameStates.STATE_LOST
       )
     ) {
       if (this.props.value === 'mine') {
@@ -84,7 +87,7 @@ class Field extends React.PureComponent {
 
     if (
       this.props.action !== 'clicked' &&
-      this.props.status === 'STATE_GOING' &&
+      this.props.status === gameStates.STATE_GOING &&
       this.state.hovered
     ) {
       style = styles.fieldHovered;

@@ -1,5 +1,8 @@
 import React from 'react';
 import Immutable from 'immutable';
+import {
+  gameStates,
+} from '@js/reducers/dataTypes';
 import IconButton from '@components/IconButton';
 import TextButton from '@components/TextButton';
 import formatTime from '@utils/formatTime';
@@ -29,15 +32,15 @@ class HeaderUi extends React.PureComponent {
           onClick={this.props.showTopbar} />
         <div style={styles.message} >
           {
-            this.props.status.state === this.props.status.STATE_PAUSED &&
+            this.props.status.state === gameStates.STATE_PAUSED &&
             'Paused'
           }
           {
-            this.props.status.state === this.props.status.STATE_LOST &&
+            this.props.status.state === gameStates.STATE_LOST &&
             'BOOM! You lose.'
           }
           {
-            this.props.status.state === this.props.status.STATE_WON &&
+            this.props.status.state === gameStates.STATE_WON &&
             'Congratulations! You win'
           }
         </div>

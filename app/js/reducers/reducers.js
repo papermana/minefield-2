@@ -1,5 +1,6 @@
 import Immutable from 'immutable';
 import {
+  gameStates,
   Status,
   State,
 } from './dataTypes';
@@ -28,7 +29,7 @@ const winGameReducer = state => {
     state = state
     .update('status', status => {
       return status
-      .set('state', status.STATE_WON);
+      .set('state', gameStates.STATE_WON);
     });
   }
 
@@ -44,7 +45,7 @@ const loseGameReducer = (state, action) => {
     state = state
     .update('status', status => {
       return status
-      .set('state', status.STATE_LOST);
+      .set('state', gameStates.STATE_LOST);
     });
   }
 

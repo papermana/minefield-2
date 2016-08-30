@@ -3,6 +3,7 @@ jest.unmock('@js/reducers/dataTypes');
 import Immutable from 'immutable';
 import {
   BoardConfig,
+  gameStates,
   Status,
   UiState,
   State,
@@ -46,7 +47,7 @@ describe('`dataTypes` - A collection of `Immutable.Record` classes for use as ap
       time: 0,
       flagsDeployed: 0,
       minesFlagged: 0,
-      state: 'STATE_GOING',
+      state: gameStates.STATE_GOING,
     };
 
     it('should return a proper instance', () => {
@@ -65,19 +66,10 @@ describe('`dataTypes` - A collection of `Immutable.Record` classes for use as ap
         time: 50,
         flagsDeployed: 1,
         minesFlagged: 2,
-        state: 'STATE_PAUSED',
+        state: gameStates.STATE_PAUSED,
       };
 
       expect((new Status(data)).toObject()).toEqual(data);
-    });
-
-    it('should have getters returning constants allowed on the property `state`', () => {
-      const result = new Status();
-
-      expect(result.STATE_GOING).toBe('STATE_GOING');
-      expect(result.STATE_PAUSED).toBe('STATE_PAUSED');
-      expect(result.STATE_WON).toBe('STATE_WON');
-      expect(result.STATE_LOST).toBe('STATE_LOST');
     });
   });
 
@@ -136,7 +128,7 @@ describe('`dataTypes` - A collection of `Immutable.Record` classes for use as ap
         time: 30,
         flagsDeployed: 1,
         minesFlagged: 0,
-        state: 'STATE_PAUSED',
+        state: gameStates.STATE_PAUSED,
       };
       const boardLayoutData = [1, 1, 0, 0, 'mine', 'mine', 3, 2, 0, 0];
       const playerActionsData = [undefined, undefined, 'flagged', 'clicked'];
