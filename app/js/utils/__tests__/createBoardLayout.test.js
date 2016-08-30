@@ -2,8 +2,7 @@ jest.unmock('@utils/createBoardLayout');
 jest.unmock('@utils/findNeighbors');
 jest.unmock('@js/dataTypes');
 
-import createBoardLayout from '@utils/createBoardLayout';
-import {
+import createBoardLayout, {
   populate,
 } from '@utils/createBoardLayout';
 import {
@@ -15,10 +14,6 @@ import Immutable from 'immutable';
 describe('`populate()` -- function which fills the board with mines in random places and then calculates values on remaining fields', () => {
   //  `populate()` uses an Immutable.js List object on which `withMutations()` was called. Therefore, we create a pseudo-`Immutable.List`, mutable object by extending a vanilla Array class.
   class Board extends Array {
-    constructor(data) {
-      super(data);
-    }
-
     set(i, value) {
       this[i] = value;
 

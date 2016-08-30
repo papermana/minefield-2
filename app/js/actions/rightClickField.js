@@ -8,9 +8,6 @@ const rightClickField = id => {
   return (dispatch, getState) => {
     const state = getState();
     const playerActions = state.playerActions;
-    const layout = state.boardLayout;
-    const config = state.boardConfig;
-    const status = state.status;
 
     if (playerActions.get(id) === undefined) {
       dispatch({
