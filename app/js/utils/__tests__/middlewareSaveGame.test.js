@@ -11,9 +11,10 @@ import {
 
 const mockStore = configureStore([saveGame]);
 
-describe('`saveGame()` - Redux middleware for saving the state of the game on every action', () => {
-  it('should save the store state in storage *after* the reducer returns', () => {
+describe('`saveGame()` - Redux middleware for saving the state of the game', () => {
+  it('should save the store state when the page is being unloaded', () => {
     const store = mockStore(new State());
+    const unload = new CustomEvent('unload');
 
     store.dispatch({
       type: 'FAKE',
@@ -27,7 +28,7 @@ describe('`saveGame()` - Redux middleware for saving the state of the game on ev
     });
     expect(window.localStorage.setItem).not.toBeCalled();
 
-    jest.runOnlyPendingTimers();
+    window.dispatchEvent(unload);
     expect(window.localStorage.setItem).toBeCalledWith(
       'savedGame',
       JSON.stringify(store.getState())
