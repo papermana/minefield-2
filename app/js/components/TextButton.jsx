@@ -26,13 +26,26 @@ class TextButton extends React.PureComponent {
   }
 
   render() {
-    let style = this.state.hovered ? styles.buttonHover : styles.button;
+    const propsToPass = Object.assign({}, this.props);
 
-    style = this.props.style
-      ? Object.assign({}, style, this.props.style)
-      : style;
+    delete propsToPass.light;
 
-    return <button {...this.props}
+    let style;
+
+    if (this.state.hovered) {
+      style = 'buttonHover';
+    }
+    else {
+      style = 'button';
+    }
+
+    if (this.props.light) {
+      style += 'Light';
+    }
+
+    style = styles[style];
+
+    return <button {...propsToPass}
       style={style}
       onMouseOver={this.hoverStart}
       onMouseOut={this.hoverEnd} >
@@ -43,6 +56,7 @@ class TextButton extends React.PureComponent {
 
 TextButton.propTypes = {
   children: React.PropTypes.string.isRequired,
+  light: React.PropTypes.bool,
   style: React.PropTypes.objectOf(React.PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.number,
@@ -67,8 +81,16 @@ const styles = {
   },
 };
 
+styles.buttonLight = Object.assign({}, styles.button, {
+  color: 'white',
+});
+
 styles.buttonHover = Object.assign({}, styles.button, {
   backgroundColor: 'rgba(0,0,0,0.05)',
+});
+
+styles.buttonHoverLight = Object.assign({}, styles.buttonLight, styles.buttonHover, {
+  backgroundColor: 'rgba(255,255,255,0.1)',
 });
 
 

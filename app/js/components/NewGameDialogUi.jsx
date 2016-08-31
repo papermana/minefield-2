@@ -33,12 +33,21 @@ class Input extends React.PureComponent {
     this.singleIncrease = this.singleIncrease.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
     this.onInputBlur = this.onInputBlur.bind(this);
+    this.onKeyDown = this.onKeyDown.bind(this);
+  }
+
+  componentDidMount() {
+    this.refs.input.addEventListener('keydown', this.onKeyDown);
   }
 
   componentWillReceiveProps(newProps) {
     this.setState({
       value: newProps.value,
     });
+  }
+
+  componentWillUnmount() {
+    this.refs.input.removeEventListener('keydown', this.onKeyDown);
   }
 
   singleDecrease() {
@@ -62,17 +71,44 @@ class Input extends React.PureComponent {
     });
   }
 
+  onKeyDown(e) {
+    if (e.keyCode === 13) {
+      this.onInputBlur();
+      this.props.confirm();
+    }
+    else if (e.keyCode === 109 || e.keyCode === 189) {
+      this.singleDecrease();
+    }
+    else if (e.keyCode === 107 || e.keyCode === 187) {
+      this.singleIncrease();
+    }
+    else {
+      return;
+    }
+
+    e.preventDefault();
+  }
+
   render() {
+    const propsToPass = Object.assign({}, this.props);
+
+    delete propsToPass.callback;
+    delete propsToPass.confirm;
+
     return <div>
-      <TextButton style={styles.inputButton}
+      <TextButton
+        light
         onClick={this.singleDecrease} >
         -
       </TextButton>
-      <input style={styles.input}
+      <input ref="input"
+        {...propsToPass}
+        style={styles.input}
         value={this.state.value}
         onChange={this.onInputChange}
         onBlur={this.onInputBlur} />
-      <TextButton style={styles.inputButton}
+      <TextButton
+        light
         onClick={this.singleIncrease} >
         +
       </TextButton>
@@ -82,6 +118,7 @@ class Input extends React.PureComponent {
 
 Input.propTypes = {
   callback: React.PropTypes.func.isRequired,
+  confirm: React.PropTypes.func.isRequired,
   name: React.PropTypes.string.isRequired,
   value: React.PropTypes.number.isRequired,
 };
@@ -138,17 +175,20 @@ class NewGameDialogUi extends React.PureComponent {
           </span>
 
           <div style={styles.messageRow} >
-            <TextButton style={styles.presetButton}
+            <TextButton
+              light
               name="easy"
               onClick={this.choosePreset} >
               Easy
             </TextButton>
-            <TextButton style={styles.presetButton}
+            <TextButton
+              light
               name="medium"
               onClick={this.choosePreset} >
               Medium
             </TextButton>
-            <TextButton style={styles.presetButton}
+            <TextButton
+              light
               name="hard"
               onClick={this.choosePreset} >
               Hard
@@ -158,24 +198,33 @@ class NewGameDialogUi extends React.PureComponent {
           <div style={styles.messageRow} >
             Rows:
             <Input name="rows"
+              autoFocus
+              tabIndex={10}
               value={this.state.rows}
-              callback={this.changeConfig} />
+              callback={this.changeConfig}
+              confirm={this.confirm} />
           </div>
           <div style={styles.messageRow} >
             Columns:
             <Input name="columns"
+              tabIndex={20}
               value={this.state.columns}
-              callback={this.changeConfig} />
+              callback={this.changeConfig}
+              confirm={this.confirm} />
           </div>
           <div style={styles.messageRow} >
             Mines:
             <Input name="mines"
+              tabIndex={30}
               value={this.state.mines}
-              callback={this.changeConfig} />
+              callback={this.changeConfig}
+              confirm={this.confirm} />
           </div>
 
           <div style={styles.confirmWrapper} >
             <TextButton
+              tabIndex={40}
+              light
               onClick={this.confirm} >
               Play
             </TextButton>
@@ -231,6 +280,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     marginBottom: '0.5em',
   },
   input: {
@@ -241,11 +291,6 @@ const styles = {
     outline: 'none',
     color: 'white',
     fontSize: 26,
-  },
-  inputButton: {
-    color: 'white',
-    paddingTop: 0,
-    paddingBottom: 0,
   },
   confirmWrapper: {
     display: 'flex',
