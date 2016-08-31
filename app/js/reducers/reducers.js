@@ -22,6 +22,7 @@ const {
   UNPAUSE_GAME,
   SET_BOARD_CONFIG,
   SHOW_NEW_GAME_DIALOG,
+  HIDE_NEW_GAME_DIALOG,
 } = types;
 
 const winGameReducer = state => {
@@ -128,6 +129,11 @@ const reducers = (state = new State(), action) => {
   else if (action.type === SHOW_NEW_GAME_DIALOG) {
     state = state
     .setIn(['uiState', 'showNewGameDialog'], true);
+  }
+  else if (action.type === HIDE_NEW_GAME_DIALOG) {
+    state = state
+    .setIn(['uiState', 'showNewGameDialog'], false)
+    .setIn(['uiState', 'topbarActive'], false);
   }
 
   state = winGameReducer(state, action);

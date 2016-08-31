@@ -35,6 +35,7 @@ class NewGameDialogUi extends React.PureComponent {
     this.choosePreset = this.choosePreset.bind(this);
     this.changeConfig = this.changeConfig.bind(this);
     this.confirm = this.confirm.bind(this);
+    this.onWrapperClick = this.onWrapperClick.bind(this);
   }
 
   choosePreset(e) {
@@ -61,13 +62,23 @@ class NewGameDialogUi extends React.PureComponent {
     this.props.startNewGame();
   }
 
+  onWrapperClick(e) {
+    if (
+      e.target !== this.refs.messageWrapper &&
+      !this.refs.messageWrapper.contains(e.target)
+    ) {
+      this.props.hide();
+    }
+  }
+
   render() {
     if (!this.props.uiState.showNewGameDialog) {
       return null;
     }
 
-    return <div style={styles.wrapper} >
-      <div style={styles.messageWrapper} >
+    return <div style={styles.wrapper}
+      onClick={this.onWrapperClick} >
+      <div ref="messageWrapper" style={styles.messageWrapper} >
         <div style={styles.message} >
           <span style={styles.title} >
             Settings
@@ -136,6 +147,7 @@ class NewGameDialogUi extends React.PureComponent {
 
 NewGameDialogUi.propTypes = {
   config: React.PropTypes.instanceOf(Immutable.Record).isRequired,
+  hide: React.PropTypes.func.isRequired,
   setBoardConfig: React.PropTypes.func.isRequired,
   startNewGame: React.PropTypes.func.isRequired,
   uiState: React.PropTypes.instanceOf(Immutable.Record).isRequired,
@@ -151,7 +163,6 @@ const styles = {
     alignItems: 'center',
     width: '100vw',
     height: '100vh',
-    pointerEvents: 'none',
   },
   messageWrapper: {
     display: 'flex',

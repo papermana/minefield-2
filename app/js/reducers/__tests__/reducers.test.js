@@ -30,6 +30,7 @@ const {
   UNPAUSE_GAME,
   SET_BOARD_CONFIG,
   SHOW_NEW_GAME_DIALOG,
+  HIDE_NEW_GAME_DIALOG,
 } = types;
 
 describe('`reducers.js` - The main reducer in the app', () => {
@@ -313,6 +314,26 @@ describe('`reducers.js` - The main reducer in the app', () => {
       data: undefined,
     });
     expect(state.uiState.showNewGameDialog).toBe(false);
+  });
+
+  it('should set `uiState.showNewGameDialog` and `uiState.topbarActive` both to false when the action `HIDE_NEW_GAME_DIALOG` is dispatched', () => {
+    let state;
+
+    state = new State({
+      uiState: {
+        showNewGameDialog: true,
+        topbarActive: true,
+      },
+    });
+    expect(state.uiState.showNewGameDialog).toBe(true);
+    expect(state.uiState.topbarActive).toBe(true);
+
+    state = reducers(state, {
+      type: HIDE_NEW_GAME_DIALOG,
+      data: undefined,
+    });
+    expect(state.uiState.showNewGameDialog).toBe(false);
+    expect(state.uiState.topbarActive).toBe(false);
   });
 
 });

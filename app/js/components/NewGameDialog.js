@@ -15,6 +15,9 @@ const mapDispatchToProps = dispatch => ({
   startNewGame() {
     dispatch(actionCreators.startNewGame());
   },
+  hide() {
+    dispatch(actionCreators.hideNewGameDialog());
+  },
 });
 
 

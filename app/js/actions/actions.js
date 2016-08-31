@@ -45,6 +45,11 @@ actionCreators.showNewGameDialog = () => ({
   data: undefined,
 });
 
+actionCreators.hideNewGameDialog = () => ({
+  type: types.HIDE_NEW_GAME_DIALOG,
+  data: undefined,
+});
+
 
 export default actionCreators;
 export {
