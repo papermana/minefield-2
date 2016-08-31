@@ -76,6 +76,7 @@ describe('`dataTypes` - A collection of `Immutable.Record` classes for use as ap
   describe('`UiState` - A class holding the state of UI', () => {
     const defaultValues = {
       topbarActive: false,
+      showNewGameDialog: false,
     };
 
     it('should return a proper instance', () => {
@@ -92,6 +93,7 @@ describe('`dataTypes` - A collection of `Immutable.Record` classes for use as ap
     it('should use the values it receives as an argument', () => {
       const data = {
         topbarActive: true,
+        showNewGameDialog: true,
       };
 
       expect((new UiState(data)).toObject()).toEqual(data);
@@ -134,6 +136,7 @@ describe('`dataTypes` - A collection of `Immutable.Record` classes for use as ap
       const playerActionsData = [undefined, undefined, 'flagged', 'clicked'];
       const uiStateData = {
         topbarActive: true,
+        showNewGameDialog: false,
       };
       const data = {
         boardConfig: boardConfigData,

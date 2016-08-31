@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '@components/Header';
 import Board from '@components/Board';
 import MessageDisplay from '@components/MessageDisplay';
+import NewGameDialog from '@components/NewGameDialog';
 
 
 class App extends React.PureComponent {
@@ -12,6 +13,7 @@ class App extends React.PureComponent {
         <Board />
       </div>
       <MessageDisplay />
+      <NewGameDialog />
     </div>;
   }
 }

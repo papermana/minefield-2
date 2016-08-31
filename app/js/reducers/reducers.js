@@ -20,6 +20,8 @@ const {
   START_NEW_GAME,
   PAUSE_GAME,
   UNPAUSE_GAME,
+  SET_BOARD_CONFIG,
+  SHOW_NEW_GAME_DIALOG,
 } = types;
 
 const winGameReducer = state => {
@@ -102,7 +104,8 @@ const reducers = (state = new State(), action) => {
     .set('boardLayout', createBoardLayout(state.get('boardConfig')))
     .set('playerActions', new Immutable.List())
     .set('status', new Status())
-    .setIn(['uiState', 'topbarActive'], false);
+    .setIn(['uiState', 'topbarActive'], false)
+    .setIn(['uiState', 'showNewGameDialog'], false);
   }
   else if (action.type === PAUSE_GAME) {
     state = state
@@ -117,6 +120,14 @@ const reducers = (state = new State(), action) => {
       return status
       .set('state', gameStates.STATE_GOING);
     });
+  }
+  else if (action.type === SET_BOARD_CONFIG) {
+    state = state
+    .mergeIn(['boardConfig'], action.data);
+  }
+  else if (action.type === SHOW_NEW_GAME_DIALOG) {
+    state = state
+    .setIn(['uiState', 'showNewGameDialog'], true);
   }
 
   state = winGameReducer(state, action);

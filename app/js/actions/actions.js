@@ -35,6 +35,16 @@ actionCreators.unpauseGame = () => ({
   data: undefined,
 });
 
+actionCreators.setBoardConfig = data => ({
+  type: types.SET_BOARD_CONFIG,
+  data,
+});
+
+actionCreators.showNewGameDialog = () => ({
+  type: types.SHOW_NEW_GAME_DIALOG,
+  data: undefined,
+});
+
 
 export default actionCreators;
 export {

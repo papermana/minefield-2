@@ -28,6 +28,8 @@ const {
   START_NEW_GAME,
   PAUSE_GAME,
   UNPAUSE_GAME,
+  SET_BOARD_CONFIG,
+  SHOW_NEW_GAME_DIALOG,
 } = types;
 
 describe('`reducers.js` - The main reducer in the app', () => {
@@ -269,6 +271,48 @@ describe('`reducers.js` - The main reducer in the app', () => {
       data: new Set([1]),
     });
     expect(state.status.state).toBe(gameStates.STATE_LOST);
+  });
+
+  it('should merge the received data into `state.boardConfig` when the action `SET_BOARD_CONFIG` is dispatched', () => {
+    let state = new State({
+      boardConfig: {
+        rows: 5,
+        columns: 5,
+        mines: 10,
+      },
+    });
+
+    state = reducers(state, {
+      type: SET_BOARD_CONFIG,
+      data: {
+        rows: 10,
+        columns: 10,
+      },
+    });
+    expect(state.boardConfig).toEqual(new BoardConfig({
+      rows: 10,
+      columns: 10,
+      mines: 10,
+    }));
+  });
+
+  it('should switch `uiState.showNewGameDialog` to true when the action `SHOW_NEW_GAME_DIALOG` is dispatched, and switch it to false on action `START_NEW_GAME`', () => {
+    let state;
+
+    state = new State();
+    expect(state.uiState.showNewGameDialog).toBe(false);
+
+    state = reducers(state, {
+      type: SHOW_NEW_GAME_DIALOG,
+      data: undefined,
+    });
+    expect(state.uiState.showNewGameDialog).toBe(true);
+
+    state = reducers(state, {
+      type: START_NEW_GAME,
+      data: undefined,
+    });
+    expect(state.uiState.showNewGameDialog).toBe(false);
   });
 
 });

@@ -24,6 +24,7 @@ class Status extends new Immutable.Record({
 
 class UiState extends new Immutable.Record({
   topbarActive: false,
+  showNewGameDialog: false,
 }) {}
 
 class State extends new Immutable.Record({

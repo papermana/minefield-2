@@ -26,12 +26,16 @@ class TextButton extends React.PureComponent {
   }
 
   render() {
-    const style = this.state.hovered ? styles.buttonHover : styles.button;
+    let style = this.state.hovered ? styles.buttonHover : styles.button;
 
-    return <button style={style}
+    style = this.props.style
+      ? Object.assign({}, style, this.props.style)
+      : style;
+
+    return <button {...this.props}
+      style={style}
       onMouseOver={this.hoverStart}
-      onMouseOut={this.hoverEnd}
-      {...this.props} >
+      onMouseOut={this.hoverEnd} >
       {this.props.children}
     </button>;
   }
@@ -39,6 +43,10 @@ class TextButton extends React.PureComponent {
 
 TextButton.propTypes = {
   children: React.PropTypes.string.isRequired,
+  style: React.PropTypes.objectOf(React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.number,
+  ])),
 };
 
 const styles = {

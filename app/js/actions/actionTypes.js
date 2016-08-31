@@ -7,3 +7,5 @@ export const HIDE_TOPBAR = 'HIDE_TOPBAR';
 export const START_NEW_GAME = 'START_NEW_GAME';
 export const PAUSE_GAME = 'PAUSE_GAME';
 export const UNPAUSE_GAME = 'UNPAUSE_GAME';
+export const SET_BOARD_CONFIG = 'SET_BOARD_CONFIG';
+export const SHOW_NEW_GAME_DIALOG = 'SHOW_NEW_GAME_DIALOG';
