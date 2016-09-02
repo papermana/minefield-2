@@ -1,0 +1,56 @@
+.button {
+  @include remove-default-button-styles;
+  @include prefix-user-select(none);
+
+  padding: 12px;
+  background-color: transparent;
+  font-family: inherit;
+  cursor: pointer;
+  box-sizing: content-box;
+
+  &:hover,
+  &:focus {
+    background-color: transparentize(black, 0.95);
+  }
+}
+
+.button--light {
+  color: white;
+
+  &:hover,
+  &:focus {
+    background-color: transparentize(white, 0.9);
+  }
+}
+
+.button--text {
+  font-size: $font-size-std;
+}
+
+%button--icon {
+  width: $icon-button-size;
+  height: $icon-button-size;
+  background-size: $icon-button-size;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.button--icon-menu {
+  @extend %button--icon;
+  @include bg-svg('hamburger');
+}
+
+.button--icon-back {
+  @extend %button--icon;
+  @include bg-svg('back-arrow');
+}
+
+.button--icon-pause {
+  @extend %button--icon;
+  @include bg-svg('pause');
+}
+
+.button--icon-play {
+  @extend %button--icon;
+  @include bg-svg('play');
+}

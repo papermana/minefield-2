@@ -1,0 +1,89 @@
+%modal-wrapper-template {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+%modal-template {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: transparentize(black, 0.2);
+  color: white;
+  pointer-events: auto;
+}
+
+.message-display {
+  @extend %modal-wrapper-template;
+
+  font-size: $font-size-std;
+  pointer-events: none;
+}
+
+.message-display__message {
+  @extend %modal-template;
+
+  height: 56px;
+}
+
+.new-game-dialog {
+  @extend %modal-wrapper-template;
+}
+
+.new-game-dialog__message {
+  @extend %modal-template;
+
+  padding: 25px;
+  font-size: $font-size-std;
+  box-sizing: border-box;
+}
+
+.new-game-dialog__form {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  max-width: 100%;
+
+  @at-root
+  .new-game-dialog__form-title {
+    margin-bottom: 1em;
+  }
+
+  @at-root
+  .new-game-dialog__form-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5em;
+  }
+
+  @at-root
+  .new-game-dialog__form-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  @at-root
+  .new-game-dialog__form-input {
+    width: 5em;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid white;
+    outline: none;
+    color: white;
+    font-size: $font-size-std;
+    font-family: inherit;
+
+    &:focus {
+      border-bottom: 3px solid white;
+    }
+  }
+}

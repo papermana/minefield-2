@@ -1,0 +1,68 @@
+.board {
+  background-color: transparent;
+  border-radius: 4px;
+}
+
+.board__row {
+  display: flex;
+  flex-direction: row;
+}
+
+.board__field {
+  @include remove-default-button-styles;
+  @include prefix-user-select(none);
+
+  min-width: $board-field-size;
+  min-height: $board-field-size;
+  font-size: $font-size-std;
+  font-family: inherit;
+  background-size: 90%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+//  This is the class for unclicked (but possibly flagged) fields:
+.board__field--covered {
+  background-color: $board-field-color;
+
+  &:hover,
+  &:focus {
+    background-color: darken($board-field-color, 8%);
+    cursor: pointer;
+  }
+}
+
+//  This field has been clicked on.
+.board__field--exposed {
+  background-color: transparent;
+
+  @at-root
+  .board__field--content-1,
+  .board__field--content-2,
+  .board__field--content-3,
+  .board__field--content-4,
+  .board__field--content-5,
+  .board__field--content-6,
+  .board__field--content-7,
+  .board__field--content-8,
+  .board__field--content-mine-exploded {
+    background-color: transparentize($board-field-color, 0.65);
+  }
+}
+
+//  This field hasn't been clicked on but the user lost the game and we want to show them where all the mines were:
+.board__field--xrayed {
+  background-color: $board-field-color;
+}
+
+.board__field--content-flag {
+  @include bg-svg('flag');
+}
+
+.board__field--content-mine {
+  @include bg-svg('mine');
+}
+
+.board__field--content-mine-exploded {
+  @include bg-svg('mine-exploded');
+}

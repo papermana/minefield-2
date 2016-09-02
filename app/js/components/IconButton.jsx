@@ -1,22 +1,14 @@
 import React from 'react';
 
 
-const src = {
-  menu: 'hamburger',
-  back: 'back-arrow',
-  pause: 'pause',
-  play: 'play',
-};
-
 class IconButton extends React.PureComponent {
   render() {
-    return <button style={styles.button}
-      {...this.props} >
-      <img src={`assets/${src[this.props.action]}.svg`}
-        width="24"
-        height="24"
-        draggable={false} />
-    </button>;
+    const propsToPass = Object.assign({}, this.props);
+
+    delete propsToPass.action;
+
+    return <button className={`button button--icon-${this.props.action}`}
+      {...propsToPass} />;
   }
 }
 
@@ -27,20 +19,6 @@ IconButton.propTypes = {
     'pause',
     'play',
   ]).isRequired,
-};
-
-const styles = {
-  button: {
-    width: 24,
-    height: 24,
-    margin: 12,
-    cursor: 'pointer',
-    //  Remove default button styles:
-    background: 'none',
-    border: 'none',
-    outline: 'none',
-    padding: 0,
-  },
 };
 
 

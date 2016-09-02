@@ -2,6 +2,7 @@
 
 const webpack = require('webpack');
 const Copy = require('copy-webpack-plugin');
+const ExtractText = require('extract-text-webpack-plugin');
 
 
 //  Get arguments passed to webpack from console/package.json:
@@ -44,6 +45,20 @@ const config = {
           plugins: ['transform-es2015-modules-commonjs'],
         },
       },
+      {
+        test: /\.scss$/,
+        loader: ExtractText.extract(
+          'style-loader',
+          'css-loader?sourceMap!sass-loader?sourceMap'
+        ),
+      },
+      {
+        test: /\.(svg|png|jpg)$/,
+        loader: 'file-loader',
+        query: {
+          name: 'assets/[name]-[hash:6].[ext]',
+        },
+      },
     ],
   },
   resolve: {
@@ -66,6 +81,10 @@ const config = {
         to: 'assets',
       },
     ]),
+    new ExtractText(
+      'main.css',
+      {allChunks: true}
+    ),
   ],
 };
 
@@ -83,6 +102,10 @@ else if (mode === 'production') {
       presets: ['react', 'es2015'],
     },
   };
+  config.modules.loader[1].loader = ExtractText.extract(
+    'style-loader',
+    'css-loader!sass-loader'
+  );
 
   config.plugins.push(...[
     new webpack.optimize.UglifyJsPlugin({

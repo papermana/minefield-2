@@ -1,0 +1,18 @@
+.gameinfo {
+  display: flex;
+  font-size: $font-size-std;
+  line-height: $font-size-std;
+}
+
+.gameinfo__flags-counter {
+  padding: 12px;
+  padding-left: $icon-button-size;
+  background-image: url(../assets/flag.svg);
+  background-size: $icon-button-size;
+  background-repeat: no-repeat;
+  background-position: left;
+}
+
+.gameinfo__timer {
+  padding: 12px;
+}

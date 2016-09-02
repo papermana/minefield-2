@@ -1,0 +1,40 @@
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: $header-height;
+  box-sizing: border-box;
+}
+
+%topbar-template {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: $header-height;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.topbar__extended {
+  @extend %topbar-template;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  justify-content: flex-start;
+  background-color: $topbar-color;
+  transform: translate3D(0, -$header-height, 0);
+  transition: transform ease-in 0.15s;
+
+  @at-root
+  .topbar__extended--active {
+    transform: translate3D(0, 0, 0);
+  }
+}
+
+.topbar__basic {
+  @extend %topbar-template;
+
+  justify-content: space-between;
+}

@@ -1,0 +1,17 @@
+@mixin remove-default-button-styles {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
+
+@mixin prefix-user-select($value) {
+  -ms-user-select: $value;
+  -moz-user-select: $value;
+  -webkit-user-select: $value;
+  user-select: $value;
+}
+
+@mixin bg-svg($name) {
+  background-image: url('../assets/' + $name + '.svg');
+}

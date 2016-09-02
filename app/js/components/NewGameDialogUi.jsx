@@ -76,15 +76,15 @@ class NewGameDialogUi extends React.PureComponent {
       return null;
     }
 
-    return <div style={styles.wrapper}
+    return <div className="new-game-dialog"
       onClick={this.onWrapperClick} >
-      <div ref="messageWrapper" style={styles.messageWrapper} >
-        <div style={styles.message} >
-          <span style={styles.title} >
+      <div ref="messageWrapper" className="new-game-dialog__message" >
+        <div className="new-game-dialog__form" >
+          <span className="new-game-dialog__form-title" >
             Settings
           </span>
 
-          <div style={styles.messageRow} >
+          <div className="new-game-dialog__form-row" >
             <TextButton
               light
               name="easy"
@@ -105,7 +105,7 @@ class NewGameDialogUi extends React.PureComponent {
             </TextButton>
           </div>
 
-          <div style={styles.messageRow} >
+          <div className="new-game-dialog__form-row" >
             Rows:
             <FormInput name="rows"
               autoFocus
@@ -114,7 +114,7 @@ class NewGameDialogUi extends React.PureComponent {
               callback={this.changeConfig}
               confirm={this.confirm} />
           </div>
-          <div style={styles.messageRow} >
+          <div className="new-game-dialog__form-row" >
             Columns:
             <FormInput name="columns"
               tabIndex={20}
@@ -122,7 +122,7 @@ class NewGameDialogUi extends React.PureComponent {
               callback={this.changeConfig}
               confirm={this.confirm} />
           </div>
-          <div style={styles.messageRow} >
+          <div className="new-game-dialog__form-row" >
             Mines:
             <FormInput name="mines"
               tabIndex={30}
@@ -131,7 +131,7 @@ class NewGameDialogUi extends React.PureComponent {
               confirm={this.confirm} />
           </div>
 
-          <div style={styles.confirmWrapper} >
+          <div className="new-game-dialog__form-buttons" >
             <TextButton
               tabIndex={40}
               light
@@ -151,53 +151,6 @@ NewGameDialogUi.propTypes = {
   setBoardConfig: React.PropTypes.func.isRequired,
   startNewGame: React.PropTypes.func.isRequired,
   uiState: React.PropTypes.instanceOf(Immutable.Record).isRequired,
-};
-
-const styles = {
-  wrapper: {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100vw',
-    height: '100vh',
-  },
-  messageWrapper: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    padding: 25,
-    backgroundColor: 'rgba(0,0,0,0.8)',
-    fontFamily: 'Roboto Condensed, sans-serif',
-    fontSize: 24,
-    color: 'white',
-    pointerEvents: 'auto',
-    boxSizing: 'border-box',
-  },
-  message: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: 350,
-    maxWidth: '100%',
-  },
-  title: {
-    marginBottom: '1em',
-  },
-  messageRow: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: '0.5em',
-  },
-  confirmWrapper: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-  },
 };
 
 

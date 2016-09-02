@@ -8,7 +8,7 @@ import {
 
 class BoardRow extends React.PureComponent {
   render() {
-    return <div style={styles.boardRow} >
+    return <div className="board__row" >
       {this.props.children}
     </div>;
   }
@@ -40,7 +40,7 @@ class BoardUi extends React.PureComponent {
       </BoardRow>;
     }
 
-    return <div style={styles.board} >
+    return <div className="board" >
       {rows}
     </div>;
   }
@@ -53,19 +53,6 @@ BoardUi.propTypes = {
   playerActions: React.PropTypes.instanceOf(Immutable.List).isRequired,
   rightClickField: React.PropTypes.func.isRequired,
   status: React.PropTypes.string.isRequired,
-};
-
-const styles = {
-  board: {
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: 'transparent',
-    borderRadius: 4,
-  },
-  boardRow: {
-    display: 'flex',
-    flexDirection: 'row',
-  },
 };
 
 

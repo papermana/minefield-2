@@ -10,6 +10,9 @@ import reducers from '@js/reducers';
 import App from '@components/App';
 
 
+//  Trigger webpack to transpile sass files:
+require('@root/sass/main.scss');
+
 const store = Redux.createStore(
   reducers,
   Redux.applyMiddleware(

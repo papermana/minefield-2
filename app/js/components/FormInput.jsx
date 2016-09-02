@@ -84,7 +84,7 @@ class FormInput extends React.PureComponent {
       </TextButton>
       <input ref="input"
         {...propsToPass}
-        style={styles.input}
+        className="new-game-dialog__form-input"
         value={this.state.value}
         onChange={this.onInputChange}
         onBlur={this.onInputBlur} />
@@ -102,18 +102,6 @@ FormInput.propTypes = {
   confirm: React.PropTypes.func.isRequired,
   name: React.PropTypes.string.isRequired,
   value: React.PropTypes.number.isRequired,
-};
-
-const styles = {
-  input: {
-    width: '5em',
-    backgroundColor: 'transparent',
-    border: 'none',
-    borderBottom: '2px solid white',
-    outline: 'none',
-    color: 'white',
-    fontSize: 26,
-  },
 };
 
 
