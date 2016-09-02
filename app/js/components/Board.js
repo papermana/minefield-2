@@ -9,6 +9,7 @@ const {
 } = actionCreators;
 
 const mapStateToProps = state => ({
+  config: state.boardConfig,
   layout: state.boardLayout,
   playerActions: state.playerActions,
   status: state.status.state,

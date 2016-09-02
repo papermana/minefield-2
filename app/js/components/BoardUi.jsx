@@ -1,10 +1,26 @@
 import React from 'react';
 import Immutable from 'immutable';
 import Field from '@components/Field';
+import {
+  BoardConfig,
+} from '@js/dataTypes';
 
+
+class BoardRow extends React.PureComponent {
+  render() {
+    return <div style={styles.boardRow} >
+      {this.props.children}
+    </div>;
+  }
+}
+
+BoardRow.propTypes = {
+  children: React.PropTypes.node.isRequired,
+};
 
 class BoardUi extends React.PureComponent {
   render() {
+    const rows = [];
     const fields = this.props.layout
     .map((field, i) => (
       <Field key={i}
@@ -16,14 +32,23 @@ class BoardUi extends React.PureComponent {
         status={this.props.status} />
     ));
 
+    for (let i = 0; i < this.props.config.rows; i++) {
+      const children = fields.slice(i * this.props.config.rows, (i * this.props.config.rows) + this.props.config.columns);
+
+      rows[i] = <BoardRow key={i} >
+        {children}
+      </BoardRow>;
+    }
+
     return <div style={styles.board} >
-      {fields}
+      {rows}
     </div>;
   }
 }
 
 BoardUi.propTypes = {
   clickField: React.PropTypes.func.isRequired,
+  config: React.PropTypes.instanceOf(BoardConfig).isRequired,
   layout: React.PropTypes.instanceOf(Immutable.List).isRequired,
   playerActions: React.PropTypes.instanceOf(Immutable.List).isRequired,
   rightClickField: React.PropTypes.func.isRequired,
@@ -33,16 +58,13 @@ BoardUi.propTypes = {
 const styles = {
   board: {
     display: 'flex',
-    flexWrap: 'wrap',
-    width: 500,
-    height: 500,
-    maxWidth: '90vh',
-    maxHeight: '90vh',
+    flexDirection: 'column',
     backgroundColor: 'transparent',
     borderRadius: 4,
-    fontSize: 32,
-    textAlign: 'center',
-    lineHeight: 48,
+  },
+  boardRow: {
+    display: 'flex',
+    flexDirection: 'row',
   },
 };
 
