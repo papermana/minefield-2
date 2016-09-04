@@ -76,10 +76,6 @@ const config = {
       {
         from: 'index.html',
       },
-      {
-        from: 'assets',
-        to: 'assets',
-      },
     ]),
     new ExtractText(
       'main.css',
