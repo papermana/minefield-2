@@ -46,7 +46,9 @@ class State extends new Immutable.Record({
           data.status.state === gameStates.STATE_WON
         )
       ) {
-        data = undefined;
+        data = {
+          boardConfig: data.boardConfig,
+        };
       }
     }
 

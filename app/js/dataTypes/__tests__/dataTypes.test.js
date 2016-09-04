@@ -191,14 +191,23 @@ describe('`dataTypes` - A collection of `Immutable.Record` classes for use as ap
       expect(new State().toObject()).toEqual(defaultValues);
     });
 
-    it('should ignore the data from storage if its `status.state` property is "STATE_WON" or "STATE_LOST"', () => {
+    it('should, except for `boardConfig`, ignore the data from storage if its `status.state` property is "STATE_WON" or "STATE_LOST"', () => {
       window.localStorage.getItem = jest.fn(() => JSON.stringify({
         status: {
           state: gameStates.STATE_WON,
         },
+        boardConfig: {
+          rows: 6,
+        },
       }));
 
-      expect(new State().toObject()).toEqual(defaultValues);
+      const expectedResult = Object.assign({}, defaultValues, {
+        boardConfig: new BoardConfig({
+          rows: 6,
+        }),
+      });
+
+      expect(new State().toObject()).toEqual(expectedResult);
     });
   });
 
