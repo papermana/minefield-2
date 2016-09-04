@@ -6,39 +6,29 @@ import {
 } from '@js/dataTypes';
 
 
-class BoardRow extends React.PureComponent {
-  render() {
-    return <div className="board__row" >
-      {this.props.children}
-    </div>;
-  }
-}
-
-BoardRow.propTypes = {
-  children: React.PropTypes.node.isRequired,
-};
-
 class BoardUi extends React.PureComponent {
   render() {
-    const rows = [];
-    const fields = this.props.layout
-    .map((field, i) => (
-      <Field key={i}
-        value={field}
-        id={i}
-        action={this.props.playerActions.get(i)}
-        clickField={this.props.clickField}
-        rightClickField={this.props.rightClickField}
-        status={this.props.status} />
-    ));
+    const rows = this.props.layout
+    .groupBy((field, i) => Math.floor(i / this.props.config.columns))
+    .toList()
+    .map((row, rowKey) => {
+      const children = row
+      .map((field, fieldKey) => {
+        const id = (this.props.config.columns * rowKey) + fieldKey;
 
-    for (let i = 0; i < this.props.config.rows; i++) {
-      const children = fields.slice(i * this.props.config.rows, (i * this.props.config.rows) + this.props.config.columns);
+        return <Field key={id}
+          value={field}
+          id={id}
+          action={this.props.playerActions.get(id)}
+          clickField={this.props.clickField}
+          rightClickField={this.props.rightClickField}
+          status={this.props.status} />;
+      });
 
-      rows[i] = <BoardRow key={i} >
+      return <div key={rowKey} className="board__row" >
         {children}
-      </BoardRow>;
-    }
+      </div>;
+    });
 
     return <div className="board" >
       {rows}
