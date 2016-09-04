@@ -4,14 +4,10 @@ import actionCreators from '@js/actions';
 
 
 const mapStateToProps = state => ({
-  status: state.status,
   uiState: state.uiState,
 });
 
 const mapDispatchToProps = dispatch => ({
-  startTimer() {
-    dispatch(actionCreators.startTimer());
-  },
   showTopbar() {
     dispatch(actionCreators.showTopbar());
   },
@@ -20,12 +16,6 @@ const mapDispatchToProps = dispatch => ({
   },
   startNewGame() {
     dispatch(actionCreators.showNewGameDialog());
-  },
-  pauseGame() {
-    dispatch(actionCreators.pauseGame());
-  },
-  unpauseGame() {
-    dispatch(actionCreators.unpauseGame());
   },
 });
 
